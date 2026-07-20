@@ -13,9 +13,9 @@ const Hero = () => (
         <Link to="/courses" className="site-button">
           Explore programs
         </Link>
-        <Link to="/contact" className="site-button secondary">
+        <a href="/prospectus.pdf" className="site-button secondary" target="_blank" rel="noreferrer">
           Request information
-        </Link>
+        </a>
       </div>
     </div>
     <div className="hero-card">

@@ -1,3 +1,17 @@
 from django.db import models
 
-# Create your models here.
+
+class NewsArticle(models.Model):
+    title = models.CharField(max_length=220)
+    slug = models.SlugField(max_length=240, unique=True)
+    summary = models.CharField(max_length=320)
+    content = models.TextField()
+    author = models.CharField(max_length=120, blank=True)
+    published_at = models.DateTimeField(auto_now_add=True)
+    is_published = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['-published_at']
+
+    def __str__(self):
+        return self.title

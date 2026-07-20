@@ -6,7 +6,9 @@ const MainLayout = () => (
   <div className="app-shell">
     <div className="announcement-bar">
       <span>ADMISSIONS OPEN FOR SEPTEMBER 2026 INTAKE</span>
-      <a href="/contact">Download prospectus</a>
+      <a href="/prospectus.pdf" target="_blank" rel="noreferrer">
+        Download prospectus
+      </a>
     </div>
     <Navbar />
     <main className="page-content">
