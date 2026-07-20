@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,700&display=swap');
+
+:root {
+  color-scheme: light;
+  --bg: #f7f3eb;
+  --surface: #ffffff;
+  --surface-muted: #f2eee5;
+  --surface-alt: #f1ede3;
+  --text: #26221a;
+  --text-muted: #6b6458;
+  --text-inverse: #ffffff;
+  --border: rgba(38, 34, 26, 0.12);
+  --shadow: 0 24px 60px rgba(33, 36, 24, 0.1);
+  --brand: #1a3214;
+  --brand-soft: #233e1a;
+  --accent: #a4802a;
+  --accent-soft: #d6b57f;
+  --radius: 28px;
+  --radius-sm: 16px;
+  --max-width: 1200px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  background-color: var(--bg);
+  color: var(--text);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+a {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
