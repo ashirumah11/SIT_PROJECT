@@ -1,0 +1,221 @@
+.footer {
+  background: linear-gradient(180deg, #193314 0%, #152910 100%);
+  color: #f5f1df;
+  padding: 60px 40px;
+  margin-top: 80px;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(245,241,223,0.08);
+  letter-spacing: 0.5px;
+  color: #f5f1df;
+}
+
+.footer-description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: rgba(245,241,223,0.9);
+  margin-bottom: 24px;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+  color: #f5f1df;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.social-icon:hover {
+  background: var(--accent-soft);
+  color: #1a3214;
+  transform: translateY(-3px);
+}
+
+/* Instagram: white rounded square with black glyph */
+/* (Instagram uses the default .social-icon styles) */
+
+/* Footer Menu */
+.footer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-menu li a {
+  color: rgba(245,241,223,0.9);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  padding-left: 0;
+}
+
+.footer-menu li a:hover {
+  color: var(--accent);
+  padding-left: 8px;
+}
+
+/* Twitter Section */
+.twitter-handle {
+  font-size: 0.95rem;
+  color: rgba(245,241,223,0.9);
+  margin-top: 12px;
+}
+
+/* Contact Items */
+.contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  font-size: 0.95rem;
+  color: rgba(245,241,223,0.9);
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+  color: var(--accent);
+}
+
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 50%;
+  color: var(--accent);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover .contact-icon {
+  background: var(--accent);
+  color: #1a3214;
+  transform: scale(1.1);
+}
+
+.contact-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 20px;
+    margin-top: 60px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-title {
+    font-size: 1.1rem;
+  }
+
+  .footer-description {
+    font-size: 0.9rem;
+  }
+
+  .social-icons {
+    gap: 12px;
+  }
+
+  .social-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .social-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 30px 15px;
+  }
+
+  .footer-container {
+    gap: 20px;
+  }
+
+  .footer-title {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+
+  .footer-description {
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+  }
+
+  .contact-item {
+    gap: 12px;
+    font-size: 0.85rem;
+  }
+
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .contact-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+}

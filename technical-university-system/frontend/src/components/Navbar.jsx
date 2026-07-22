@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from '../assets/ptvti-logo.jpg'
 
@@ -13,9 +13,17 @@ const navLinks = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false)
+  const [shrunk, setShrunk] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => setShrunk(window.scrollY > 36)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <header className="site-nav">
+    <header className={`site-nav ${shrunk ? 'scrolled' : ''}`}>
       <div className="nav-brand">
         <NavLink to="/" className="brand-link" aria-label="Palazzolo Institute">
           <img src={logo} alt="Palazzolo Institute logo" className="brand-logo" />
