@@ -1,22 +1,62 @@
 export default function VisionMissionSection() {
+  const coreValues = [
+    {
+      title: 'Transformation',
+      icon: '🔄',
+      description: 'Changing lives through quality education'
+    },
+    {
+      title: 'Empowerment',
+      icon: '💪',
+      description: 'Equipping learners with practical skills'
+    },
+    {
+      title: 'Innovation',
+      icon: '⚡',
+      description: 'Driving industry-relevant solutions'
+    },
+    {
+      title: 'Integrity',
+      icon: '✨',
+      description: 'Building trust and excellence'
+    },
+    {
+      title: 'Entrepreneurship',
+      icon: '🚀',
+      description: 'Creating opportunities for growth'
+    }
+  ];
+
   return (
     <section className="section-block about-section about-vision-mission-section">
-      <div className="about-section-header">
-        <span className="about-eyebrow">Vision & Mission</span>
-        <h2>A practical, values-driven formation for every student.</h2>
+      <div className="vision-mission-grid">
+        <article className="vision-mission-item">
+          <span className="vision-mission-kicker">Our Vision</span>
+          <div className="vision-mission-rule" aria-hidden="true" />
+          <p>
+            To transform youth through training on technical, vocational and entrepreneurial skills, empower and promote them to serve the world.
+          </p>
+        </article>
+        <article className="vision-mission-item">
+          <span className="vision-mission-kicker">Our Mission</span>
+          <div className="vision-mission-rule" aria-hidden="true" />
+          <p>
+            To be the leading Technical and Vocational Center in Kenya that emphasizes on total transformation and empowering for the world.
+          </p>
+        </article>
       </div>
-      <div className="about-featured-grid">
-        <div className="about-featured-card">
-          <h3>Our Vision</h3>
-          <p>
-            We envision a Uganda where every young person has access to world-class technical education grounded in faith, integrity, and the dignity of skilled work.
-          </p>
-        </div>
-        <div className="about-featured-card">
-          <h3>Our Mission</h3>
-          <p>
-            We equip students with market-ready trades, moral formation, and lifelong support — bridging the gap between education and dignified employment.
-          </p>
+
+      {/* Core Values Section */}
+      <div className="core-values-container">
+        <h3 className="core-values-title">Our Core Values</h3>
+        <div className="core-values-grid">
+          {coreValues.map((value, index) => (
+            <div key={index} className="core-value-card">
+              <div className="core-value-icon">{value.icon}</div>
+              <h4 className="core-value-name">{value.title}</h4>
+              <p className="core-value-description">{value.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>

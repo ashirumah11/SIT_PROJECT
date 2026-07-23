@@ -1504,31 +1504,21 @@
   .hero-sub { font-size: 0.98rem }
 }
 
-.about-sisters-section,
-.about-vision-mission-section {
+.about-sisters-section {
   background: #d8f0d2;
   color: #13320f;
   padding: 48px 32px;
   border-radius: 32px;
 }
 
-.about-sisters-section .about-eyebrow,
-.about-vision-mission-section .about-eyebrow {
+.about-sisters-section .about-eyebrow {
   color: #14521d;
 }
 
 .about-sisters-section p,
-.about-vision-mission-section p,
 .about-sisters-section h2,
-.about-vision-mission-section h2,
-.about-sisters-section h4,
-.about-vision-mission-section h3 {
+.about-sisters-section h4 {
   color: #0f3616;
-}
-
-.about-vision-mission-section .about-featured-card {
-  background: rgba(255, 255, 255, 0.96);
-  border-color: rgba(49, 105, 31, 0.35);
 }
 
 .about-values-grid {

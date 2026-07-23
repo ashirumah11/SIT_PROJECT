@@ -2,13 +2,16 @@ import heroWorkshop from '../../assets/hero-workshop.jpg'
 
 export default function SistersRoleSection() {
   return (
-    <section className="section-block about-section about-sisters-section">
-      <div className="about-section-header">
-        <span className="about-eyebrow">The Sisters of St. Martha</span>
-        <h2>The Sisters remain at the centre of daily life on campus.</h2>
+    <section className="about-story-section about-sisters-story-section">
+      {/* The image below is also used as the low-opacity watermark at the bottom of this section. */}
+      <div className="about-story-watermark" aria-hidden="true">
+        <img src={heroWorkshop} alt="" />
       </div>
-      <div className="about-two-column about-sisters-grid">
-        <div className="about-sisters-copy">
+
+      <div className="about-story-content">
+        <div className="about-story-copy">
+          <span className="about-eyebrow">The Sisters of St. Martha</span>
+          <h1>The Sisters remain at the centre of daily life on campus.</h1>
           <p>
             The congregation founded, owns and stewards the institute. Beyond governance, individual Sisters serve as department heads, chaplains, hostel matrons and instructors — living alongside students and shaping the moral and academic culture of the campus.
           </p>
@@ -31,7 +34,8 @@ export default function SistersRoleSection() {
             </div>
           </div>
         </div>
-        <div className="about-section-media">
+
+        <div className="about-story-image">
           <img src={heroWorkshop} alt="Photo of the Sisters" />
         </div>
       </div>

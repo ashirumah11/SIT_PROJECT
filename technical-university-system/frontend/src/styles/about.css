@@ -49,6 +49,10 @@
   margin: 0 auto;
 }
 
+.about-story-content-reversed {
+  grid-template-columns: minmax(320px, 0.9fr) minmax(0, 1.1fr);
+}
+
 .about-story-copy {
   max-width: 660px;
 }
@@ -102,6 +106,17 @@
   height: 52%;
 }
 
+/* Reversed layout (for History section) */
+.about-story-content-reversed .about-story-image::before {
+  right: auto;
+  left: -12px;
+}
+
+.about-story-content-reversed .about-story-image::after {
+  right: auto;
+  left: -12px;
+}
+
 .about-story-image img {
   width: 100%;
   min-height: 410px;
@@ -109,6 +124,36 @@
   object-position: center;
   border-radius: 0 0 var(--radius) 0;
   box-shadow: 0 28px 54px rgba(26, 50, 20, 0.16);
+}
+
+/* Sisters Role Section */
+.about-sisters-story-section {
+  background: linear-gradient(135deg, #f5faf3 0%, #eff6eb 64%, #e0ead6 100%) !important;
+}
+
+.about-sisters-story-section .about-story-copy .about-eyebrow {
+  color: #14521d;
+}
+
+.about-sisters-story-section .about-story-copy h1 {
+  color: #0f3616;
+}
+
+.about-sisters-story-section .about-story-copy p,
+.about-sisters-story-section .about-sisters-list h4 {
+  color: #0f3616;
+}
+
+.about-sisters-story-section .about-sisters-list p {
+  color: #2d5a28;
+}
+
+.about-sisters-story-section .about-story-image::before {
+  background: #14521d;
+}
+
+.about-sisters-story-section .about-story-image::after {
+  background: #14521d;
 }
 
 .about-hero-section {
@@ -201,25 +246,16 @@
 }
 
 .about-sisters-section {
+  width: 100vw;
+  margin: 36px calc(50% - 50vw);
   background: #d8f0d2;
   color: #13320f;
-  padding: 48px 32px;
-  border-radius: 32px;
-}
-
-.about-vision-mission-section {
-  background: var(--surface);
-  color: var(--text);
-  padding: 48px 32px;
-  border-radius: 32px;
+  padding: clamp(48px, 8vw, 72px) 24px;
+  /* Deprecated: Use about-sisters-story-section for new layout */
 }
 
 .about-sisters-section .about-eyebrow {
   color: #14521d;
-}
-
-.about-vision-mission-section .about-eyebrow {
-  color: var(--accent);
 }
 
 .about-sisters-section p,
@@ -228,31 +264,133 @@
   color: #0f3616;
 }
 
-.about-vision-mission-section p,
-.about-vision-mission-section h2,
-.about-vision-mission-section h3 {
+.about-vision-mission-section {
+  width: 100vw;
+  margin: 36px calc(50% - 50vw);
+  background: var(--surface-muted);
+  padding: clamp(42px, 6vw, 72px) 24px;
+}
+
+.vision-mission-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(calc(var(--max-width) - 48px), 100%);
+  margin: 0 auto;
+  gap: clamp(40px, 7vw, 104px);
+}
+
+.vision-mission-item + .vision-mission-item {
+  padding-left: clamp(40px, 7vw, 104px);
+  border-left: 1px solid var(--border);
+}
+
+.vision-mission-kicker {
+  display: block;
+  color: var(--accent);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.75rem, 2.8vw, 2.35rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.vision-mission-rule {
+  width: 48px;
+  height: 3px;
+  margin: 22px 0;
+  border-radius: 999px;
+  background: var(--accent-soft);
+}
+
+.vision-mission-item p {
+  max-width: 520px;
   color: var(--text);
+  font-size: clamp(1.02rem, 1.35vw, 1.18rem);
+  font-weight: 500;
+  line-height: 1.75;
 }
 
-.about-vision-mission-section .about-featured-card {
+/* Core Values Section */
+.core-values-container {
+  margin-top: clamp(60px, 10vw, 100px);
+  padding-top: clamp(40px, 8vw, 80px);
+  border-top: 1px solid var(--border);
+}
+
+.core-values-title {
+  color: var(--accent);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: clamp(40px, 8vw, 60px);
+}
+
+.core-values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: clamp(24px, 4vw, 40px);
+  width: min(calc(var(--max-width) - 48px), 100%);
+  margin: 0 auto;
+}
+
+.core-value-card {
+  padding: clamp(24px, 4vw, 36px);
+  border-radius: 16px;
   background: var(--surface);
-  border-color: var(--border);
-  transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  border: 1px solid var(--border);
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.about-vision-mission-section .about-featured-card:hover {
-  transform: translateY(-6px);
-  background: rgba(31, 77, 32, 0.12);
-  border-color: rgba(31, 77, 32, 0.4);
-  box-shadow: 0 28px 60px rgba(18, 38, 18, 0.12);
+.core-value-card:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(229, 97, 32, 0.3);
+  transform: translateY(-4px);
 }
 
-.about-vision-mission-section .about-featured-card:hover h3 {
-  color: #184f21;
+.core-value-card:hover .core-value-icon {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
-.about-vision-mission-section .about-featured-card:hover p {
-  color: rgba(15, 49, 22, 0.9);
+.core-value-card:hover .core-value-name,
+.core-value-card:hover .core-value-description {
+  color: white;
+}
+
+.core-value-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-soft) 0%, rgba(229, 97, 32, 0.1) 100%);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.core-value-name {
+  color: var(--text-strong);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  transition: color 0.3s ease;
+}
+
+.core-value-description {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+  transition: color 0.3s ease;
 }
 
 .about-values-grid {
@@ -475,6 +613,21 @@
   .about-two-column {
     gap: 24px;
   }
+
+  .vision-mission-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .vision-mission-item + .vision-mission-item {
+    padding: 36px 0 0;
+    border-top: 1px solid var(--border);
+    border-left: 0;
+  }
+
+  .core-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 640px) {
@@ -506,6 +659,14 @@
   .about-featured-row,
   .about-values-grid {
     grid-template-columns: 1fr;
+  }
+
+  .core-values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .core-values-title {
+    font-size: 1.75rem;
   }
 
   .about-card-image {
