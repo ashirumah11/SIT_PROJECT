@@ -5,7 +5,7 @@ import logo from '../assets/ptvti-logo.jpg'
 const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
-  { label: 'Academics', to: '/courses' },
+  { label: 'Departments', to: '/courses' },
   { label: 'Student Life', to: '/student-life' },
   { label: 'Production Work', to: '/production-work' },
   { label: 'Contact', to: '/contact' },
@@ -14,7 +14,7 @@ const navLinks = [
 const Navbar = () => {
   const [open, setOpen] = useState(false)
   const [shrunk, setShrunk] = useState(false)
-
+//Shrinks the navbar when the user scrolls down the page  
   useEffect(() => {
     const handleScroll = () => setShrunk(window.scrollY > 36)
     handleScroll()
@@ -62,7 +62,7 @@ const Navbar = () => {
           Portal
         </button>
         <NavLink to="/contact" className="nav-action-button apply-link">
-          Apply Now
+          APPLY NOW
         </NavLink>
       </div>
     </header>

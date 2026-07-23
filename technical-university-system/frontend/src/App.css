@@ -59,7 +59,7 @@
 }
 
 .brand-logo {
-  width: 98px;
+  width: 120px;
   height: auto;
   object-fit: contain;
   animation: logo-breathe 5s ease-in-out infinite alternate;
@@ -129,14 +129,14 @@
 }
 /* Footer */
 .site-nav.scrolled {
-  padding: 12px 20px;
+  padding: 9px 15px;
   background: rgba(255, 255, 255, 0.96);
   border-bottom-color: rgba(31, 48, 31, 0.12);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
 }
 
 .site-nav.scrolled .brand-logo {
-  width: 78px;
+  width: 59px;
   transition: width 0.25s ease;
 }
 
@@ -232,14 +232,15 @@
 }
 
 .nav-action-button {
-  border-radius: 999px;
-  padding: 10px 18px;
+  border-radius: 0;
+  padding: 7.5px 13.5px;
   font-weight: 700;
-  border: 1px solid transparent;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  border: 1px solid var(--brand);
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
 }
 
 .portal-link {
+  display: none;
   background: transparent;
   color: var(--brand);
   border-color: var(--border);
@@ -255,7 +256,10 @@
 }
 
 .apply-link:hover {
-  background: #11250d;
+  background: var(--surface);
+  color: var(--brand);
+  border-color: var(--brand);
+  transform: translateY(-1px);
 }
 
 /* Button */
@@ -263,8 +267,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: none;
-  border-radius: 999px;
+  border: 1px solid var(--accent);
+  border-radius: 0;
   padding: 14px 24px;
   cursor: pointer;
   background: var(--accent);
@@ -277,9 +281,10 @@
 
 .site-button:hover {
   transform: translateY(-1px) scale(1.01);
-  box-shadow: 0 18px 32px rgba(0, 0, 0, 0.15);
-  background: var(--brand);
-  color: #ffffff;
+  box-shadow: none;
+  background: var(--surface);
+  color: var(--brand);
+  border-color: var(--brand);
 }
 
 .site-button:active {
@@ -797,7 +802,7 @@
   flex-direction: column;
   background: #fff;
   border: 1px solid rgba(31, 48, 31, 0.08);
-  border-radius: 28px;
+  border-radius: 0;
   padding: 28px;
   box-shadow: 0 20px 50px rgba(27, 38, 25, 0.08);
   min-height: 320px;
@@ -874,7 +879,7 @@
   display: flex;
   flex-direction: column;
   padding: 0;
-  border-radius: 32px;
+  border-radius: 0;
   border: 1px solid var(--border);
   background: var(--surface);
   box-shadow: var(--shadow);
@@ -1084,62 +1089,82 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.8rem 1rem;
-  border-radius: 999px;
+  width: 75%;
+  max-width: 140px;
+  margin-left: 24px;
+  padding: 0.64rem 0.8rem;
+  border-radius: 0;
+  border: 1px solid transparent;
   background: rgba(255, 255, 255, 0.08);
   color: var(--brand);
   font-weight: 700;
   text-decoration: none;
-  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease;
 }
 
 .course-link:hover {
   transform: translateY(-1px);
+  background: var(--surface);
 }
 
 .course-card.department-engineering .course-link {
   background: #3c6dd1;
   color: #fff;
+  border-color: #3c6dd1;
 }
 
 .course-card.department-engineering .course-link:hover {
-  background: #315ab4;
+  background: var(--surface);
+  color: #3c6dd1;
+  border-color: #3c6dd1;
 }
 
 .course-card.department-cosmetology .course-link {
   background: #d15f9d;
   color: #fff;
+  border-color: #d15f9d;
 }
 
 .course-card.department-cosmetology .course-link:hover {
-  background: #b74f83;
+  background: var(--surface);
+  color: #d15f9d;
+  border-color: #d15f9d;
 }
 
 .course-card.department-fashion-design .course-link {
   background: #d1853c;
   color: #fff;
+  border-color: #d1853c;
 }
 
 .course-card.department-fashion-design .course-link:hover {
-  background: #b36d2f;
+  background: var(--surface);
+  color: #d1853c;
+  border-color: #d1853c;
 }
 
 .course-card.department-hospitality .course-link {
   background: #4ea08a;
   color: #fff;
+  border-color: #4ea08a;
 }
 
 .course-card.department-hospitality .course-link:hover {
-  background: #42846f;
+  background: var(--surface);
+  color: #4ea08a;
+  border-color: #4ea08a;
 }
 
 .course-card.department-ict .course-link {
   background: #3198d6;
   color: #fff;
+  border-color: #3198d6;
 }
 
 .course-card.department-ict .course-link:hover {
-  background: #2a84c0;
+  background: var(--surface);
+  color: #3198d6;
+  border-color: #3198d6;
 }
 
 .course-details.department-engineering .detail-card,

@@ -32,7 +32,7 @@ const highlights = [
 const courses = [
   {
     id: 'software-engineering',
-    title: 'Engineering',
+    title: 'Engineering Department',
     description: 'Develop practical engineering trade skills and building support.',
     duration: '12 months',
     level: 'Professional',
@@ -42,7 +42,7 @@ const courses = [
   },
   {
     id: 'cosmetology-fundamentals',
-    title: 'Cosmetology Fundamentals',
+    title: 'Cosmetology Department',
     description: 'Learn salon skills, beauty therapies, and professional client care.',
     duration: '9 months',
     level: 'Specialized',
@@ -60,7 +60,7 @@ const courses = [
   },
   {
     id: 'hospitality-management',
-    title: 'Hospitality Management',
+    title: 'Hospitality Department',
     description: 'Prepare for guest services, events, and modern hospitality operations.',
     duration: '11 months',
     level: 'Professional',
@@ -69,7 +69,7 @@ const courses = [
   },
   {
     id: 'ict-systems',
-    title: 'ICT Systems',
+    title: 'ICT Department',
     description: 'Master information and communications technology for modern workplaces.',
     duration: '12 months',
     level: 'Technical',

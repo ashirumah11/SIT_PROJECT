@@ -109,7 +109,7 @@ const CourseDetails = () => {
         <h2>Course not found</h2>
         <p>The course you are looking for does not exist.</p>
         <Link className="course-link" to="/courses">
-          View all academics
+          View all departments
         </Link>
       </section>
     )
@@ -122,7 +122,7 @@ const CourseDetails = () => {
         <h2>{details.title}</h2>
         <p>{details.description}</p>
         <Link to="/courses" className="site-button secondary back-link">
-          Back to Academics
+          Back to Departments
         </Link>
       </div>
       <div className="detail-grid">
