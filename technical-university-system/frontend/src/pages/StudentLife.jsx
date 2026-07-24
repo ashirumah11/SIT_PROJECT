@@ -2,7 +2,7 @@ import HeroCarousel from '../components/HeroCarousel'
 import heroStudentLife from '../assets/student-life.jpg'
 import eventCultureDay from '../assets/student-life2.jpg'
 import eventTeamBuilding from '../assets/student-life3.jpg'
-import eventBibleStudy from '../assets/course-engineering.jpg'
+import eventBibleStudy from '../assets/student-life4.jpg'
 
 const carouselImages = [
   {
