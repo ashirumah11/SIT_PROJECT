@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from 'react'
-import slide1 from '../assets/hero.png'
-import slide2 from '../assets/hero-workshop.jpg'
-import slide3 from '../assets/course-ict.jpg'
+import slide1 from '../assets/hero-carousel1.jpg'
+import slide2 from '../assets/hero-carousel2.jpg'
+import slide3 from '../assets/hero-carousel3.jpg'
 
-const slides = [
+const defaultSlides = [
   {
     id: 'slide-1',
     image: slide1,
@@ -24,7 +24,14 @@ const slides = [
   },
 ]
 
-const HeroCarousel = () => {
+const HeroCarousel = ({
+  slides: propSlides,
+  showControls = true,
+  showOverlay = true,
+  showIndicators = true,
+  autoplayInterval = 5500,
+}) => {
+  const slides = propSlides ?? defaultSlides
   const [index, setIndex] = useState(0)
   const timeoutRef = useRef(null)
 
@@ -38,7 +45,7 @@ const HeroCarousel = () => {
     stopAutoplay()
     timeoutRef.current = setTimeout(() => {
       setIndex((i) => (i + 1) % slides.length)
-    }, 5500)
+    }, autoplayInterval)
   }
 
   const stopAutoplay = () => {
@@ -60,42 +67,48 @@ const HeroCarousel = () => {
     <section className="hero-carousel" aria-roledescription="carousel">
       {slides.map((s, i) => (
         <div
-          key={s.id}
+          key={s.id || s.src || i}
           className={`hero-slide ${i === index ? 'active' : ''}`}
-          style={{ backgroundImage: `url(${s.image})` }}
+          style={{ backgroundImage: `url(${s.image ?? s.src})` }}
           aria-hidden={i === index ? 'false' : 'true'}
         >
           <div className="hero-gradient" />
         </div>
       ))}
 
-      <div className="hero-overlay">
-        <div className="hero-inner">
-          <h1 className="hero-title">{slides[index].title}</h1>
-          <p className="hero-sub">{slides[index].subtitle}</p>
-          <div className="hero-cta">
-            <a className="site-button" href="/courses">Explore programs</a>
-            <a className="site-button secondary" href="/prospectus.pdf" target="_blank" rel="noreferrer">Request information</a>
+      {showOverlay && (
+        <div className="hero-overlay">
+          <div className="hero-inner">
+            <h1 className="hero-title">{slides[index]?.title}</h1>
+            <p className="hero-sub">{slides[index]?.subtitle}</p>
+            <div className="hero-cta">
+              <a className="site-button" href="/courses">Explore programs</a>
+              <a className="site-button secondary" href="/prospectus.pdf" target="_blank" rel="noreferrer">Request information</a>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
-      <div className="hero-controls">
-        <button type="button" className="control prev" onClick={goPrev} aria-label="Previous slide">‹</button>
-        <button type="button" className="control next" onClick={goNext} aria-label="Next slide">›</button>
-      </div>
+      {showControls && (
+        <div className="hero-controls">
+          <button type="button" className="control prev" onClick={goPrev} aria-label="Previous slide">‹</button>
+          <button type="button" className="control next" onClick={goNext} aria-label="Next slide">›</button>
+        </div>
+      )}
 
-      <div className="hero-indicators" role="tablist">
-        {slides.map((s, i) => (
-          <button
-            key={s.id}
-            className={`indicator ${i === index ? 'active' : ''}`}
-            onClick={() => setIndex(i)}
-            aria-label={`Go to slide ${i + 1}`}
-            aria-selected={i === index}
-          />
-        ))}
-      </div>
+      {showIndicators && (
+        <div className="hero-indicators" role="tablist">
+          {slides.map((s, i) => (
+            <button
+              key={s.id || i}
+              className={`indicator ${i === index ? 'active' : ''}`}
+              onClick={() => setIndex(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              aria-selected={i === index}
+            />
+          ))}
+        </div>
+      )}
     </section>
   )
 }

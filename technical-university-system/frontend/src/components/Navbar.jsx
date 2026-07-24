@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from '../assets/ptvti-logo.jpg'
 
@@ -7,23 +7,35 @@ const navLinks = [
   { label: 'About', to: '/about' },
   { label: 'Departments', to: '/courses' },
   { label: 'Student Life', to: '/student-life' },
-  { label: 'Production Work', to: '/production-work' },
+  { label: 'Gallery', to: '/gallery' },
   { label: 'Contact', to: '/contact' },
 ]
 
 const Navbar = () => {
   const [open, setOpen] = useState(false)
-  const [shrunk, setShrunk] = useState(false)
-//Shrinks the navbar when the user scrolls down the page  
+  const [hidden, setHidden] = useState(false)
+  const lastScrollY = useRef(0)
+
   useEffect(() => {
-    const handleScroll = () => setShrunk(window.scrollY > 36)
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      if (currentScrollY <= 80) {
+        setHidden(false)
+      } else if (currentScrollY > lastScrollY.current) {
+        setHidden(true)
+      } else {
+        setHidden(false)
+      }
+      lastScrollY.current = currentScrollY
+    }
+
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (
-    <header className={`site-nav ${shrunk ? 'scrolled' : ''}`}>
+    <header className={`site-nav ${hidden ? 'hidden' : ''}`}>
       <div className="nav-brand">
         <NavLink to="/" className="brand-link" aria-label="Palazzolo Institute">
           <img src={logo} alt="Palazzolo Institute logo" className="brand-logo" />

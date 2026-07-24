@@ -1,8 +1,8 @@
 import { useParams, Link } from 'react-router-dom'
-import engineeringImage from '../assets/course-engineering.jpg'
-import cosmetologyImage from '../assets/course-cosmetology.jpg'
-import fashionImage from '../assets/course-fashion.jpg'
-import hospitalityImage from '../assets/course-hospitality.jpg'
+import engineeringImage from '../assets/course-engineering1.jpg'
+import cosmetologyImage from '../assets/course-hairdressing.jpg'
+import fashionImage from '../assets/course-fashion1.jpg'
+import hospitalityImage from '../assets/course-hospitality1.jpg'
 import ictImage from '../assets/course-ict.jpg'
 
 const courseDetails = {
@@ -142,14 +142,14 @@ const CourseDetails = () => {
 
         <aside className="detail-summary">
           <article className="detail-card">
-            <h3>Courses offered</h3>
-            <ul className="course-detail-list">
-              {details.coursesOffered.map((course) => (
-                <li key={course.name}>
-                  <strong>{course.name}</strong> — {course.duration}, {course.fee}
-                </li>
-              ))}
-            </ul>
+              <h3>Courses offered</h3>
+              <ul className="course-detail-list courses-offered-list">
+                {details.coursesOffered.map((course) => (
+                  <li key={course.name}>
+                    <strong>{course.name}</strong> — {course.duration}
+                  </li>
+                ))}
+              </ul>
           </article>
 
           <article className="detail-card">
@@ -161,9 +161,14 @@ const CourseDetails = () => {
               <span>Level</span>
               <strong>{details.level}</strong>
             </div>
-            <Link className="site-button" to="/contact">
-              Contact admissions
-            </Link>
+            <div className="detail-actions">
+              <Link className="nav-action-button apply-link" to="/contact">
+                APPLY NOW
+              </Link>
+              <Link className="site-button" to="/contact">
+                Contact admissions
+              </Link>
+            </div>
           </article>
         </aside>
       </div>

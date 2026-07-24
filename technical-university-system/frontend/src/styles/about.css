@@ -198,6 +198,14 @@
   margin-bottom: 24px;
 }
 
+.about-infrastructure-section .about-section-header {
+  text-align: center;
+}
+
+.about-infrastructure-section .about-eyebrow {
+  display: inline-block;
+}
+
 .about-eyebrow {
   display: inline-block;
   margin-bottom: 14px;
@@ -427,16 +435,90 @@
   margin-top: 24px;
 }
 
-.about-infrastructure-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.about-infrastructure-section {
+  background: #fff;
 }
 
-.about-card {
-  border-radius: 28px;
-  overflow: hidden;
-  background: var(--surface);
+.about-infrastructure-carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 32px;
+  width: 100%;
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-infrastructure-control {
+  flex: none;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
   border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.about-infrastructure-track-container {
+  overflow-x: auto;
+  flex: 1;
+  min-width: 0;
+}
+
+.about-infrastructure-track {
+  display: flex;
+  gap: 24px;
+}
+
+.about-infrastructure-slide {
+  flex: 0 0 320px;
+  min-width: 320px;
+}
+
+.about-infrastructure-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid rgba(31, 48, 31, 0.08);
+  border-radius: 0;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(27, 38, 25, 0.08);
+  min-height: 320px;
+}
+
+.about-infrastructure-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  border-radius: 0;
+}
+
+.about-infrastructure-card-body {
+  padding-top: 18px;
+}
+
+.about-infrastructure-card-body h4 {
+  margin: 0 0 14px;
+  color: var(--brand);
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+
+.about-infrastructure-card-body p {
+  margin: 0;
+  color: #4d5a44;
+  line-height: 1.8;
+}
+
+.about-infrastructure-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .about-card-body {
@@ -478,6 +560,106 @@
   padding: 24px;
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.14);
+}
+
+.about-departments-header {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-team-copy {
+  max-width: 860px;
+  margin: 24px auto 0;
+  color: var(--text-muted);
+  line-height: 1.85;
+  text-align: center;
+}
+
+.about-team-carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 32px;
+  width: 100%;
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-team-control {
+  flex: none;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.about-team-track-container {
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+}
+
+.about-team-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 400ms ease;
+  will-change: transform;
+}
+
+.about-team-slide {
+  flex: 0 0 33.3333%;
+  min-width: 33.3333%;
+}
+
+.about-team-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid rgba(31, 48, 31, 0.08);
+  border-radius: 0;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(27, 38, 25, 0.08);
+  min-height: 320px;
+}
+
+.about-team-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.about-team-card-body {
+  padding-top: 18px;
+}
+
+.about-team-card h3 {
+  margin: 0 0 14px;
+  color: var(--brand);
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+
+.about-team-card span {
+  display: inline-flex;
+  margin-bottom: 12px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.about-team-card p {
+  margin: 0;
+  color: #4d5a44;
+  line-height: 1.8;
 }
 
 .about-department-grid {
@@ -571,17 +753,31 @@
   border-radius: 999px;
   padding: 12px 24px;
   font-weight: 700;
+  transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
 }
 
 .about-cta-button {
   background: var(--brand);
   color: var(--text-inverse);
+  border: 1px solid transparent;
+}
+
+.about-cta-button:hover {
+  background: #fff;
+  color: var(--brand);
+  border-color: var(--brand);
 }
 
 .about-cta-secondary {
   background: transparent;
   border: 1px solid var(--border);
   color: var(--text);
+}
+
+.about-cta-secondary:hover {
+  background: var(--brand);
+  color: #fff;
+  border-color: var(--brand);
 }
 
 @media (max-width: 980px) {

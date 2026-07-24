@@ -5,7 +5,7 @@ import About from './pages/About.jsx'
 import Courses from './pages/Courses.jsx'
 import CourseDetails from './pages/CourseDetails.jsx'
 import StudentLife from './pages/StudentLife.jsx'
-import ProductionWork from './pages/ProductionWork.jsx'
+import Gallery from './pages/Gallery.jsx'
 import Contact from './pages/Contact.jsx'
 import NotFound from './pages/NotFound.jsx'
 import './App.css'
@@ -20,7 +20,7 @@ function App() {
           <Route path="courses" element={<Courses />} />
           <Route path="courses/:id" element={<CourseDetails />} />
           <Route path="student-life" element={<StudentLife />} />
-          <Route path="production-work" element={<ProductionWork />} />
+          <Route path="gallery" element={<Gallery />} />
           <Route path="contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Route>

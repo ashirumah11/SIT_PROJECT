@@ -1,9 +1,10 @@
+import { useEffect } from 'react'
 import CourseCard from '../components/CourseCard.jsx'
-import engineeringImage from '../assets/course-engineering.jpg'
-import fashionImage from '../assets/course-fashion.jpg'
-import hospitalityImage from '../assets/course-hospitality.jpg'
+import engineeringImage from '../assets/course-engineering1.jpg'
+import fashionImage from '../assets/course-fashion1.jpg'
+import hospitalityImage from '../assets/course-hospitality1.jpg'
 import ictImage from '../assets/course-ict.jpg'
-import cosmetologyImage from '../assets/course-cosmetology.jpg'
+import cosmetologyImage from '../assets/course-hairdressing.jpg'
 
 const courses = [
   {
@@ -54,22 +55,28 @@ const courses = [
   },
 ]
 
-const Courses = () => (
-  <section className="section-block">
-    <div className="section-heading">
-      <span className="eyebrow">Departments</span>
-      <h2>Professional programs built for career-focused skills</h2>
-      <p>
-        Choose a pathway supported by modern workshops, practical labs, and placement preparation.
-      </p>
-    </div>
+const Courses = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
 
-    <div className="course-grid">
-      {courses.map((course) => (
-        <CourseCard key={course.id} course={course} />
-      ))}
-    </div>
-  </section>
-)
+  return (
+    <section className="section-block">
+      <div className="section-heading">
+        <span className="eyebrow">Departments</span>
+        <h2>Professional programs built for career-focused skills</h2>
+        <p>
+          Choose a pathway supported by modern workshops, practical labs, and placement preparation.
+        </p>
+      </div>
+
+      <div className="course-grid">
+        {courses.map((course) => (
+          <CourseCard key={course.id} course={course} />
+        ))}
+      </div>
+    </section>
+  )
+}
 
 export default Courses
