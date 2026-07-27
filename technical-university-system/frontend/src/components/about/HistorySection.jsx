@@ -1,4 +1,4 @@
-import heroWorkshop from '../../assets/hero-workshop.jpg'
+import heroWorkshop from '../../assets/about-history.jpg'
 
 export default function HistorySection() {
   return (
@@ -15,13 +15,27 @@ export default function HistorySection() {
 
         <div className="about-story-copy">
           <span className="about-eyebrow">Our History</span>
-          <h1>From four students in 1974 to a national institution.</h1>
+          <h1>Born from Hope, Built for Transformation</h1>
           <p>
-            Founded in 1974 by a small community of the Sisters of St. Martha, the institute began in two borrowed classrooms on the shores of Lake Victoria — training four young women in tailoring and household skills.
-            Fifty years later, that quiet mission has grown into a fully accredited technical & vocational institute serving over 1,200 students across twelve departments.
+           PTVTI was established as a technical and vocational training institute 
+           by the Poverelle Sisters in November 2021, in the aftermath of the COVID-19 
+           pandemic. Witnessing the devastating impact the pandemic had on young people 
+           and their families, the Sisters recognized the urgent need to equip the youth
+           with practical skills that would restore hope, create opportunities, and 
+           build a pathway to self-reliance. What began as a mission to empower 
+           the community has since grown into a center of excellence dedicated to 
+           transforming lives through quality technical and vocational education.
           </p>
           <p>
-            Through decades of steady work, the Sisters have shepherded generations of technicians, artisans and hospitality professionals into dignified employment across East Africa and the Gulf. Today the campus spans thirty acres, but the founding conviction is unchanged: skilled hands and compassionate hearts.
+            Over the past five years, PTVTI has empowered hundreds of young people 
+           with industry-relevant skills, preparing them for meaningful careers 
+           and entrepreneurship. Today, the institute proudly celebrates more 
+           than 100 graduates who are either employed in various industries or 
+           gaining valuable experience through industrial attachments. While 
+           the institute continues to grow, its commitment remains the same:
+           empowering young people with practical skills, fostering personal 
+           growth, and creating lasting opportunities that positively impact 
+           individuals, families, and the wider community.
           </p>
         </div>
       </div>

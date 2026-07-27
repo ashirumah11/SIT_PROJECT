@@ -6,6 +6,7 @@ import VisionMissionSection from '../components/about/VisionMissionSection'
 import InfrastructureSection from '../components/about/InfrastructureSection'
 import DepartmentsSection from '../components/about/DepartmentsSection'
 import ContactSection from '../components/about/ContactSection'
+import VideoGallerySection from '../components/about/VideoGallerySection'
 
 export default function About() {
   return (
@@ -13,6 +14,7 @@ export default function About() {
       <HeroSection />
       <HistorySection />
       <SistersRoleSection />
+      <VideoGallerySection />
       <VisionMissionSection />
       <InfrastructureSection />
       <DepartmentsSection />

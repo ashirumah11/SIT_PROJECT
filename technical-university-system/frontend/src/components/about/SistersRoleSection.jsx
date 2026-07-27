@@ -1,4 +1,4 @@
-import heroWorkshop from '../../assets/hero-workshop.jpg'
+import heroWorkshop from '../../assets/about-poverelle.jpg'
 
 export default function SistersRoleSection() {
   return (
@@ -10,27 +10,62 @@ export default function SistersRoleSection() {
 
       <div className="about-story-content">
         <div className="about-story-copy">
-          <span className="about-eyebrow">The Sisters of St. Martha</span>
-          <h1>The Sisters remain at the centre of daily life on campus.</h1>
+          <span className="about-eyebrow">The Poverelle Sisters</span>
+          <h1>Building Lives Through Faith and Education.</h1>
           <p>
-            The congregation founded, owns and stewards the institute. Beyond governance, individual Sisters serve as department heads, chaplains, hostel matrons and instructors — living alongside students and shaping the moral and academic culture of the campus.
+            The Poverelle Sisters are the founders and custodians of PTVTI,
+            carrying forward a mission that began in 1869 in Italy through 
+            the vision of St. Luigi Palazzolo. Inspired by his deep compassion 
+            for the poor and vulnerable, the congregation has dedicated itself
+            to uplifting communities through education, healthcare, social development,
+            charitable works, and evangelization. Today, their ministry continues
+            across many countries, and in Kenya they serve communities through
+            education, health, and social development—bringing that 
+            same vision to life through PTVTI in Kiambu.
+            </p>
+          <p>
+            At the heart of the institute are the evangelical values that define 
+            the congregation: charity, compassion, love for the poor, dignity, and 
+            respect. These principles shape every aspect of student life, creating 
+            an environment where learners are nurtured not only academically but also
+            spiritually, morally, and socially. Guided by their motto, "I keep them as
+            sons and daughters," the Sisters are committed to providing a holistic 
+            formation that prepares students to become skilled professionals, responsible
+            citizens, and compassionate members of society.
           </p>
           <div className="about-sisters-list">
             <div>
-              <h4>Formation &amp; Pastoral Care</h4>
-              <p>Daily chapel, values formation, and one-to-one mentorship for every student.</p>
+              <h4>Faith-Centered Leadership</h4>
+              <p>
+                The Sisters provide the strategic direction and governance of the institute.
+                Through the Principal, they oversee academic excellence and ensure students
+                receive relevant, high-quality technical and vocational training. 
+                The Institute Director, representing the congregation, provides leadership 
+                in administration and financial stewardship, ensuring the long-term sustainability
+                of the institution.
+              </p>
             </div>
             <div>
-              <h4>Academic Leadership</h4>
-              <p>Sisters lead four of twelve departments and chair the Board of Governors.</p>
+              <h4>Holistic Student Formation</h4>
+              <p>
+                Beyond technical education, the Sisters foster
+                an environment where students grow in character,
+                faith, leadership, and social responsibility. Their
+                mission is to form graduates who are not only competent
+                in their professions but who also embody integrity, compassion,
+                and service to others
+              </p>
             </div>
             <div>
-              <h4>Community Outreach</h4>
-              <p>Scholarships for vulnerable youth funded through the congregation's ministries.</p>
-            </div>
-            <div>
-              <h4>Stewardship</h4>
-              <p>Long-term custodianship of the campus, its heritage, and its future.</p>
+              <h4>A Lasting Commitment to the Community</h4>
+              <p>
+                Every initiative at PTVTI reflects the congregation's
+                enduring commitment to empowering young people and transforming
+                lives through education. By equipping students with practical skills
+                and strong values, the Poverelle Sisters continue 
+                the legacy of St. Luigi Palazzolo—creating opportunities,
+                restoring hope, and building stronger communities for generations to come.
+              </p>
             </div>
           </div>
         </div>

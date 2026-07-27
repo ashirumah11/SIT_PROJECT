@@ -132,8 +132,26 @@
   color: var(--text-muted);
   text-decoration: none;
   font-weight: 600;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  padding: 10px 16px;
+  border-radius: 0;
+  display: inline-flex;
+  align-items: center;
 }
+
+.nav-link.active,
+.nav-link:hover {
+  color: var(--text-inverse);
+  background: var(--brand);
+  border: 1px solid var(--brand);
+  border-radius: 0;
+  box-shadow: 0 12px 24px rgba(28, 75, 28, 0.18);
+}
+
+.nav-link:hover {
+  color: var(--text-inverse);
+}
+
 /* Footer */
 .site-nav.scrolled {
   padding: 9px 15px;
@@ -181,11 +199,6 @@
 .scroll-top-button:focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.9);
   outline-offset: 4px;
-}
-
-.nav-link.active,
-.nav-link:hover {
-  color: var(--brand);
 }
 
 .nav-links.open {
