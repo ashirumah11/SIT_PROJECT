@@ -14,7 +14,7 @@ const Hero = () => (
           Explore programs
         </Link>
         <a href="/prospectus.pdf" className="site-button secondary" target="_blank" rel="noreferrer">
-          Request information
+         Get Brochure
         </a>
       </div>
     </div>

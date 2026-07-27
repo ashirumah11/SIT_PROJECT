@@ -83,7 +83,8 @@ const HeroCarousel = ({
             <p className="hero-sub">{slides[index]?.subtitle}</p>
             <div className="hero-cta">
               <a className="site-button" href="/courses">Explore programs</a>
-              <a className="site-button secondary" href="/prospectus.pdf" target="_blank" rel="noreferrer">Request information</a>
+              <a className="site-button secondary" href="/prospectus.pdf" 
+              target="_blank" rel="noreferrer">Get Brochure</a>
             </div>
           </div>
         </div>

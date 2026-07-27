@@ -4,7 +4,7 @@ const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
+    phone: '',
     message: '',
   })
   const [status, setStatus] = useState('')
@@ -23,7 +23,7 @@ const ContactForm = () => {
     setFormData({
       name: '',
       email: '',
-      subject: '',
+      phone: '',
       message: '',
     })
   }
@@ -31,7 +31,7 @@ const ContactForm = () => {
   return (
     <form className="contact-form" onSubmit={handleSubmit}>
       <div className="field-group">
-        <label htmlFor="name">Name</label>
+        <label htmlFor="name">Your Name</label>
         <input
           id="name"
           name="name"
@@ -43,7 +43,7 @@ const ContactForm = () => {
       </div>
 
       <div className="field-group">
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">Your Email</label>
         <input
           id="email"
           name="email"
@@ -56,13 +56,14 @@ const ContactForm = () => {
       </div>
 
       <div className="field-group">
-        <label htmlFor="subject">Subject</label>
+        <label htmlFor="phone">Phone</label>
         <input
-          id="subject"
-          name="subject"
-          value={formData.subject}
+          id="phone"
+          name="phone"
+          type="tel"
+          value={formData.phone}
           onChange={handleChange}
-          placeholder="Message subject"
+          placeholder="Your phone number"
           required
         />
       </div>

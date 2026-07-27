@@ -12,15 +12,85 @@
   background: var(--brand);
   color: var(--text-inverse);
   font-size: 0.85rem;
-  padding: 10px 24px;
-  text-align: center;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.announcement-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
 }
 
 .announcement-bar a {
   color: var(--text-inverse);
   text-decoration: underline;
-  margin-left: 12px;
 }
+
+.announcement-contacts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-inverse);
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: opacity 0.2s ease;
+}
+
+.contact-link:hover {
+  opacity: 0.8;
+}
+
+.contact-icon {
+  font-size: 1rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--text-inverse);
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.social-link:hover {
+  transform: translateY(-2px);
+  opacity: 0.8;
+}
+
+.social-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
 
 .page-content {
   flex: 1;
@@ -1366,7 +1436,7 @@
 .detail-card,
 .detail-summary {
   padding: 28px;
-  border-radius: 24px;
+  border-radius: 0;
   background: var(--surface);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
@@ -2144,6 +2214,100 @@
   gap: 18px;
 }
 
+/* Contact Page Redesign */
+.contact-page {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.contact-info-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.contact-info-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: 28px 24px;
+  border-radius: 0;
+  background: #e8f0f7;
+  border: 1px solid #d0e0f0;
+  box-shadow: none;
+}
+
+.contact-info-card h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #92c05a;
+}
+
+.contact-info-card p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #92c05a;
+  line-height: 1.5;
+}
+
+.info-icon {
+  font-size: 2.4rem;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-main-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: stretch;
+}
+
+.contact-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-form-wrapper .contact-form {
+  max-width: none;
+  margin: 0;
+}
+
+.contact-form-wrapper h2 {
+  margin: 0 0 8px 0;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.contact-form-wrapper > p {
+  margin: 0 0 24px 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.contact-map-wrapper {
+  width: 100%;
+  min-height: 500px;
+  border-radius: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.contact-map-wrapper iframe {
+  border-radius: 0;
+}
+
 .field-group {
   display: grid;
   gap: 10px;
@@ -2185,7 +2349,9 @@
   .hero-block,
   .course-grid,
   .content-cards,
-  .detail-grid {
+  .detail-grid,
+  .contact-main-section,
+  .contact-info-section {
     grid-template-columns: 1fr;
   }
 
@@ -2227,5 +2393,36 @@
   .hero-card {
     min-height: auto;
     padding: 24px;
+  }
+
+  .announcement-bar {
+    padding: 10px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .announcement-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .announcement-contacts {
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .contact-info {
+    font-size: 0.75rem;
+  }
+
+  .contact-link {
+    font-size: 0.75rem;
+  }
+
+  .social-links {
+    gap: 8px;
   }
 }

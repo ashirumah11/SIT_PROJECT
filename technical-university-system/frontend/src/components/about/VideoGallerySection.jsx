@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const videos = [
   {
-    title: 'The Sisters of PTVTI',
+    title: ' Poverelle Sisters',
     description: 'A short video about the ministry and mission of the sisters at the institute.',
     src: 'https://www.youtube.com/embed/kfKH7hIgX1U?enablejsapi=1&rel=0&modestbranding=1',
   },
