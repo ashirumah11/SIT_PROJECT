@@ -73,9 +73,14 @@ const Navbar = () => {
         <button className="nav-action-button portal-link" type="button">
           Portal
         </button>
-        <NavLink to="/contact" className="nav-action-button apply-link">
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLSd7xoENz9pDaFgHlhPqdBQ6Io6BNlAQH3zQopXGq2A5BM0uig/viewform?usp=publish-editor"
+          className="nav-action-button apply-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           APPLY NOW
-        </NavLink>
+        </a>
       </div>
     </header>
   )

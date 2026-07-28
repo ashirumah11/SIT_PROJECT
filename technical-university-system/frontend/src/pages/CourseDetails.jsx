@@ -162,9 +162,14 @@ const CourseDetails = () => {
               <strong>{details.level}</strong>
             </div>
             <div className="detail-actions">
-              <Link className="nav-action-button apply-link" to="/contact">
+              <a
+                className="nav-action-button apply-link"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSd7xoENz9pDaFgHlhPqdBQ6Io6BNlAQH3zQopXGq2A5BM0uig/viewform?usp=publish-editor"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 APPLY NOW
-              </Link>
+              </a>
               <Link className="site-button" to="/contact">
                 Contact admissions
               </Link>
