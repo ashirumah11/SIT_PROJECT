@@ -1,13 +1,16 @@
 import { useState } from 'react'
+import { submitContactMessage } from '../services/api.js'
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    subject: '',
     message: '',
   })
   const [status, setStatus] = useState('')
+  const [error, setError] = useState('')
 
   const handleChange = (event) => {
     const { name, value } = event.target
@@ -17,15 +20,25 @@ const ContactForm = () => {
     }))
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    setStatus('Thank you! Your message has been submitted.')
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      message: '',
-    })
+    setStatus('Sending...')
+    setError('')
+
+    try {
+      await submitContactMessage(formData)
+      setStatus('Thank you! Your message has been received.')
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: '',
+      })
+    } catch (err) {
+      setError(err.message || 'Sorry, something went wrong.')
+      setStatus('')
+    }
   }
 
   return (
@@ -69,6 +82,18 @@ const ContactForm = () => {
       </div>
 
       <div className="field-group">
+        <label htmlFor="subject">Subject</label>
+        <input
+          id="subject"
+          name="subject"
+          value={formData.subject}
+          onChange={handleChange}
+          placeholder="Subject"
+          required
+        />
+      </div>
+
+      <div className="field-group">
         <label htmlFor="message">Message</label>
         <textarea
           id="message"
@@ -84,7 +109,9 @@ const ContactForm = () => {
       <button type="submit" className="site-button">
         Send message
       </button>
+
       {status && <p className="form-status">{status}</p>}
+      {error && <p className="form-error">{error}</p>}
     </form>
   )
 }

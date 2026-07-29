@@ -1,6 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { getGalleryItems } from '../services/api.js'
 
-const galleryImages = [
+const BACKEND_BASE_URL = 'http://localhost:8000'
+
+const normalizeImageUrl = (url) => {
+  if (!url || typeof url !== 'string' || url.trim() === '') return null
+  if (/^https?:\/\//.test(url)) return url
+  return url.startsWith('/')
+    ? `${BACKEND_BASE_URL}${url}`
+    : `${BACKEND_BASE_URL}/${url}`
+}
+
+const defaultGalleryImages = [
   {
     src: 'https://images.pixieset.com/47781949/01ba12474a25e4dcfd9f1762b8ba602c-large.jpg',
     alt: 'Campus event photo 1',
@@ -76,8 +87,63 @@ const galleryImages = [
 ]
 
 const Gallery = () => {
-  const [activeImage, setActiveImage] = useState(null)
-  const closeLightbox = () => setActiveImage(null)
+  const [galleryImages, setGalleryImages] = useState(defaultGalleryImages)
+  const [activeImageIndex, setActiveImageIndex] = useState(null)
+
+  const activeImage = activeImageIndex === null ? null : galleryImages[activeImageIndex]
+
+  const closeLightbox = () => setActiveImageIndex(null)
+
+  const showPreviousImage = (event) => {
+    event?.stopPropagation()
+    setActiveImageIndex((currentIndex) => {
+      if (currentIndex === null) return 0
+      return (currentIndex - 1 + galleryImages.length) % galleryImages.length
+    })
+  }
+
+  const showNextImage = (event) => {
+    event?.stopPropagation()
+    setActiveImageIndex((currentIndex) => {
+      if (currentIndex === null) return 0
+      return (currentIndex + 1) % galleryImages.length
+    })
+  }
+
+  useEffect(() => {
+    getGalleryItems()
+      .then((items) => {
+        if (Array.isArray(items) && items.length > 0) {
+          setGalleryImages(
+            items.map((item) => ({
+              src: normalizeImageUrl(item.image_url) || normalizeImageUrl(item.image) || '',
+              alt: item.alt_text || item.caption || item.title || 'Gallery image',
+            }))
+          )
+        }
+      })
+      .catch(() => {})
+  }, [])
+
+  useEffect(() => {
+    if (activeImageIndex === null) return
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault()
+        showPreviousImage(event)
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault()
+        showNextImage(event)
+      } else if (event.key === 'Escape') {
+        event.preventDefault()
+        closeLightbox()
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [activeImageIndex, galleryImages.length])
 
   return (
     <>
@@ -90,17 +156,19 @@ const Gallery = () => {
       </div>
 
       <div className="gallery-grid">
-        {galleryImages.map((image) => (
-          <article className="gallery-card" key={image.src}>
-            <button
-              type="button"
-              className="gallery-card-button"
-              onClick={() => setActiveImage(image)}
-            >
-              <img src={image.src} alt={image.alt} />
-            </button>
-          </article>
-        ))}
+        {galleryImages
+          .filter((image) => image?.src)
+          .map((image, index) => (
+            <article className="gallery-card" key={`${image.src || 'image'}-${index}`}>
+              <button
+                type="button"
+                className="gallery-card-button"
+                onClick={() => setActiveImageIndex(index)}
+              >
+                <img src={image.src} alt={image.alt || 'Gallery image'} />
+              </button>
+            </article>
+          ))}
       </div>
 
       <div className="gallery-link-row">
@@ -126,8 +194,37 @@ const Gallery = () => {
             >
               ×
             </button>
-            <img src={activeImage.src} alt={activeImage.alt} />
-            <p>{activeImage.alt}</p>
+
+            <div className="gallery-lightbox-media">
+              <button
+                type="button"
+                className="gallery-nav-button"
+                onClick={showPreviousImage}
+                aria-label="View previous image"
+              >
+                ‹
+              </button>
+
+              {activeImage?.src ? (
+                <img src={activeImage.src} alt={activeImage.alt || 'Gallery image'} />
+              ) : (
+                <div className="gallery-empty-state">No image available</div>
+              )}
+
+              <button
+                type="button"
+                className="gallery-nav-button"
+                onClick={showNextImage}
+                aria-label="View next image"
+              >
+                ›
+              </button>
+            </div>
+
+            <div className="gallery-caption-row">
+              <p>{activeImage.alt}</p>
+              <span>{activeImageIndex + 1} / {galleryImages.length}</span>
+            </div>
           </div>
         </div>
       )}

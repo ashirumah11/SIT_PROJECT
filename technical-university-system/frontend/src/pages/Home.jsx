@@ -10,6 +10,7 @@ import heroWorkshopImage from '../assets/hero-workshop1.jpg'
 import nitaLogo from '../assets/nita-logo.png'
 import unescoLogo from '../assets/unesco-logo.png'
 import tvetaLogo from '../assets/tveta-logo.png'
+import { getNewsArticles, getTestimonials } from '../services/api.js'
 
 const highlights = [
   {
@@ -78,63 +79,6 @@ const courses = [
   },
 ]
 
-const testimonials = [
-  {
-    id: 'student-1',
-    image: heroWorkshopImage,
-    quote: 'PTVTI is awesome. I feel like I have a new lease on life because of their encouragement and support.',
-    name: 'Fr. Michael',
-    role: 'Staff',
-  },
-  {
-    id: 'student-2',
-    image: cosmetologyImage,
-    quote: 'The community is welcoming and the learning experience is truly practical.',
-    name: 'Jane Mwangi',
-    role: 'Graduate',
-  },
-  {
-    id: 'student-3',
-    image: hospitalityImage,
-    quote: 'I gained new skills and confidence from the friendly instructors and hands-on classrooms.',
-    name: 'Esther Njeri',
-    role: 'Current Student',
-  },
-]
-
-const newsItems = [
-  {
-    id: 'news-1',
-    date: 'Mar',
-    title: 'This is the biggest Color festival event in Kihara at ACK ST. PHILIP Grounds.',
-    description: 'This is the biggest Color festival event in Kihara. Don’t miss out on our episodes. On the 11th of March.',
-  },
-  {
-    id: 'news-2',
-    date: 'May',
-    title: 'New organization are continually added and seal there …',
-    description: 'Students in computer lab, maintaining at least six feet distance from each other while writing some programs.',
-  },
-  {
-    id: 'news-3',
-    date: 'May',
-    title: 'Students in computer lab, maintaining at least six feet distance from each other while writing some programs .',
-    description: 'Students in computer lab, maintaining at least six feet distance from each other while writing some programs.',
-  },
-  {
-    id: 'news-4',
-    date: 'Jun',
-    title: 'New youth scholarship drives technical learning at Palazzolo.',
-    description: 'A fresh opportunity for learners to join practical training and receive career support.',
-  },
-  {
-    id: 'news-5',
-    date: 'Jul',
-    title: 'Campus life expands with fresh labs and student-led clubs.',
-    description: 'Our community grows with new spaces for project work, workshops, and student events.',
-  },
-]
-
 const accredentials = [
   {
     id: 'nita',
@@ -195,11 +139,15 @@ const Stats = () => {
   )
 }
 
-const Testimonials = () => {
+const Testimonials = ({ testimonials }) => {
   const [active, setActive] = useState(0)
+
+  if (!testimonials || testimonials.length === 0) return null
 
   const handlePrev = () => setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length)
   const handleNext = () => setActive((prev) => (prev + 1) % testimonials.length)
+
+  const current = testimonials[active] || testimonials[0]
 
   return (
     <section className="section-block section-testimonials">
@@ -212,12 +160,12 @@ const Testimonials = () => {
       <div className="testimonials-wrapper">
         <button type="button" className="testimonial-control prev" onClick={handlePrev} aria-label="Previous testimonial">‹</button>
         <div className="testimonial-card">
-          <div className="testimonial-image" style={{ backgroundImage: `url(${testimonials[active].image})` }} />
+          <div className="testimonial-image" style={{ backgroundImage: `url(${current.image})` }} />
           <div className="testimonial-copy">
-            <div className="testimonial-quote">“{testimonials[active].quote}”</div>
+            <div className="testimonial-quote">“{current.quote}”</div>
             <div className="testimonial-author">
-              <strong>{testimonials[active].name}</strong>
-              <span>{testimonials[active].role}</span>
+              <strong>{current.name}</strong>
+              <span>{current.role}</span>
             </div>
           </div>
         </div>
@@ -227,10 +175,12 @@ const Testimonials = () => {
   )
 }
 
-const NewsSection = () => {
+const NewsSection = ({ newsItems }) => {
   const [visibleSlides, setVisibleSlides] = useState(3)
   const [currentIndex, setCurrentIndex] = useState(3)
   const [isTransitioning, setIsTransitioning] = useState(true)
+
+  if (!newsItems || newsItems.length === 0) return null
 
   const cloneCount = visibleSlides
   const infiniteNews = [
@@ -323,6 +273,76 @@ const NewsSection = () => {
 }
 
 const Home = () => {
+  // State variables cleanly scoped inside the Home component
+  const [newsItems, setNewsItems] = useState([
+    {
+      id: 'news-1',
+      date: 'Mar',
+      title: 'This is the biggest Color festival event in Kihara at ACK ST. PHILIP Grounds.',
+      description: 'This is the biggest Color festival event in Kihara. Don’t miss out on our episodes. On the 11th of March.',
+    },
+  ])
+
+  const [testimonials, setTestimonials] = useState([
+    {
+      id: 'student-1',
+      image: heroWorkshopImage,
+      quote: 'PTVTI is awesome. I feel like I have a new lease on life because of their encouragement and support.',
+      name: 'Fr. Michael',
+      role: 'Staff',
+    },
+    {
+      id: 'student-2',
+      image: cosmetologyImage,
+      quote: 'The community is welcoming and the learning experience is truly practical.',
+      name: 'Jane Mwangi',
+      role: 'Graduate',
+    },
+    {
+      id: 'student-3',
+      image: hospitalityImage,
+      quote: 'I gained new skills and confidence from the friendly instructors and hands-on classrooms.',
+      name: 'Esther Njeri',
+      role: 'Current Student',
+    },
+  ])
+
+  // Fetch backend data once Home mounts
+  useEffect(() => {
+    getNewsArticles()
+      .then((items) => {
+        if (Array.isArray(items) && items.length > 0) {
+          setNewsItems(
+            items.map((item) => ({
+              id: item.id,
+              date: item.published_at
+                ? new Date(item.published_at).toLocaleString('default', { month: 'short' })
+                : '',
+              title: item.title,
+              description: item.summary || item.content || '',
+            }))
+          )
+        }
+      })
+      .catch((err) => console.error('Failed to fetch news articles:', err))
+
+    getTestimonials()
+      .then((items) => {
+        if (Array.isArray(items) && items.length > 0) {
+          setTestimonials(
+            items.map((item) => ({
+              id: item.id,
+              image: item.image_url || heroWorkshopImage,
+              quote: item.quote,
+              name: item.author,
+              role: item.role || item.company || '',
+            }))
+          )
+        }
+      })
+      .catch((err) => console.error('Failed to fetch testimonials:', err))
+  }, [])
+
   const [visibleSlides, setVisibleSlides] = useState(3)
   const [currentIndex, setCurrentIndex] = useState(3)
   const [isTransitioning, setIsTransitioning] = useState(true)
@@ -380,7 +400,7 @@ const Home = () => {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-  //Green arrow to click and return the page back to top
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -423,81 +443,87 @@ const Home = () => {
           <p>Choose a pathway with modern labs, mentorship, and real product work.</p>
         </div>
 
-      <div className="carousel-wrapper">
-        <button
-          type="button"
-          className="carousel-control prev"
-          onClick={handlePrev}
-          aria-label="Previous programs"
-        >
-          ‹
-        </button>
-
-        <div className="carousel-track-container">
-          <div
-            className="carousel-track"
-            onTransitionEnd={handleTransitionEnd}
-            style={{
-              transform: `translateX(-${currentIndex * (100 / visibleSlides)}%)`,
-              transition: isTransitioning ? 'transform 400ms ease' : 'none',
-            }}
+        <div className="carousel-wrapper">
+          <button
+            type="button"
+            className="carousel-control prev"
+            onClick={handlePrev}
+            aria-label="Previous programs"
           >
-            {infiniteSlides.map((course, index) => (
-              <div key={`${course.id}-${index}`} className="carousel-slide">
-                <CourseCard course={course} />
-              </div>
-            ))}
+            ‹
+          </button>
+
+          <div className="carousel-track-container">
+            <div
+              className="carousel-track"
+              onTransitionEnd={handleTransitionEnd}
+              style={{
+                transform: `translateX(-${currentIndex * (100 / visibleSlides)}%)`,
+                transition: isTransitioning ? 'transform 400ms ease' : 'none',
+              }}
+            >
+              {infiniteSlides.map((course, index) => (
+                <div key={`${course.id}-${index}`} className="carousel-slide">
+                  <CourseCard course={course} />
+                </div>
+              ))}
+            </div>
           </div>
+
+          <button
+            type="button"
+            className="carousel-control next"
+            onClick={handleNext}
+            aria-label="Next programs"
+          >
+            ›
+          </button>
+        </div>
+      </section>
+
+      <Stats />
+      
+      {/* Testimonials passed with state */}
+      <Testimonials testimonials={testimonials} />
+
+      {/* News section passed with state */}
+      <NewsSection newsItems={newsItems} />
+
+      <section className="section-block section-accredentials">
+        <div className="section-heading">
+          <span className="eyebrow">Accredentials</span>
+          <h2>Our recognized partners</h2>
+          <p>Trusted industry authorities supporting our programmes and certifications.</p>
         </div>
 
+        <div className="accredentials-grid">
+          {accredentials.map((item) => (
+            <a
+              key={item.id}
+              href={item.href}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="accredential-card"
+              aria-label={item.label}
+            >
+              <img src={item.logo} alt={item.label} className="accredential-logo" />
+            </a>
+          ))}
+        </div>
+      </section>
+
+      {showTopButton && (
         <button
           type="button"
-          className="carousel-control next"
-          onClick={handleNext}
-          aria-label="Next programs"
+          className="scroll-top-button"
+          onClick={scrollToTop}
+          aria-label="Back to top"
         >
-          ›
+          ↑
         </button>
-      </div>
-    </section>
-
-    <Stats />
-    <Testimonials />
-    <NewsSection />
-    <section className="section-block section-accredentials">
-      <div className="section-heading">
-        <span className="eyebrow">Accredentials</span>
-        <h2>Our recognised partners</h2>
-        <p>Trusted industry authorities supporting our programmes and certifications.</p>
-      </div>
-
-      <div className="accredentials-grid">
-        {accredentials.map((item) => (
-          <a
-            key={item.id}
-            href={item.href}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="accredential-card"
-            aria-label={item.label}
-          >
-            <img src={item.logo} alt={item.label} className="accredential-logo" />
-          </a>
-        ))}
-      </div>
-    </section>
-    {showTopButton && (
-      <button
-        type="button"
-        className="scroll-top-button"
-        onClick={scrollToTop}
-        aria-label="Back to top"
-      >
-        ↑
-      </button>
-    )}
-  </>
-)
+      )}
+    </>
+  )
 }
 
 export default Home
