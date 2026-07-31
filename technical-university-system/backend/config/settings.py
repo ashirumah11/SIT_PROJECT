@@ -1,5 +1,6 @@
 from datetime import timedelta
 from pathlib import Path
+from pickle import TRUE
 
 # Base directory (backend folder)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,6 +10,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -29,6 +31,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'config.middleware.PermissionsPolicyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -68,7 +71,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = 'static/'
+STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -111,3 +114,246 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = False
+
+JAZZMIN_SETTINGS = {
+    # ==========================================
+    # Branding
+    # ==========================================
+    "site_title": "PTVTI Administration",
+    "site_header": "Palazzolo Technical & Vocational Training Institute",
+    "site_brand": "PTVTI CMS",
+    "site_logo": None,
+    "login_logo": None,
+    "welcome_sign": "Welcome to PTVTI Administration",
+    "copyright": "© Palazzolo Technical & Vocational Training Institute",
+
+    # ==========================================
+    # Layout
+    # ==========================================
+    "navigation_expanded": True,
+    "show_sidebar": True,
+    "show_ui_builder": False,
+    "hide_apps": [],
+    "hide_models": [],
+
+    # ==========================================
+    # Sidebar Order
+    # ==========================================
+    "order_with_respect_to": [
+        "auth",
+        "courses",
+        "admissions",
+        "content",
+        "contacts",
+        "news",
+    ],
+
+    # ==========================================
+    # Top Menu
+    # ==========================================
+    "topmenu_links": [
+        {"model": "auth.User"},
+        {"app": "courses"},
+        {"app": "content"},
+        {"app": "contacts"},
+        {"app": "news"},
+        {"name": "Website", "url": "/", "new_window": True},
+    ],
+
+    # ==========================================
+    # Icons
+    # ==========================================
+    "icons": {
+
+        # Apps
+        "auth": "fas fa-user-shield",
+        "courses": "fas fa-graduation-cap",
+        "content": "fas fa-layer-group",
+        "contacts": "fas fa-address-book",
+        "news": "fas fa-newspaper",
+        "admissions": "fas fa-user-graduate",
+
+        # Authentication
+        "auth.user": "fas fa-users",
+        "auth.group": "fas fa-user-lock",
+
+        # Courses
+        "courses.course": "fas fa-book-open",
+        "courses.department": "fas fa-building",
+
+        # Contacts
+        "contacts.contactmessage": "fas fa-envelope-open-text",
+        "contacts.departmentcontact": "fas fa-phone-square-alt",
+
+        # Content
+        "content.announcement": "fas fa-bullhorn",
+        "content.eventitem": "fas fa-calendar-check",
+        "content.galleryitem": "fas fa-images",
+        "content.staffmember": "fas fa-user-tie",
+        "content.testimonial": "fas fa-comments",
+
+        # News
+        "news.newsarticle": "fas fa-newspaper",
+    },
+
+    # ==========================================
+    # Custom Links
+    # ==========================================
+    "custom_links": {
+        "courses": [{
+            "name": "Course Website",
+            "url": "/",
+            "icon": "fas fa-globe",
+        }],
+    },
+
+    # ==========================================
+    # Change Form
+    # ==========================================
+    "changeform_format": "horizontal_tabs",
+
+    # ==========================================
+    # Admin Index
+    # ==========================================
+    "show_sidebar": True,
+    "navigation_expanded": True,
+
+    # ==========================================
+    # Dashboard
+    # ==========================================
+    "default_icon_parents": "fas fa-folder",
+
+    "default_icon_children": "fas fa-circle",
+
+    # ==========================================
+    # Buttons
+    # ==========================================
+    "related_modal_active": True,
+
+    # ==========================================
+    # Language
+    # ==========================================
+    "language_chooser": False,
+}
+
+JAZZMIN_SETTINGS = {
+    # ==========================================
+    # Branding
+    # ==========================================
+    "site_title": "PTVTI Administration",
+    "site_header": "Palazzolo Technical & Vocational Training Institute",
+    "site_brand": "PTVTI CMS",
+    "site_logo": None,
+    "login_logo": None,
+    "welcome_sign": "Welcome to PTVTI Administration",
+    "copyright": "© Palazzolo Technical & Vocational Training Institute",
+
+    # ==========================================
+    # Layout
+    # ==========================================
+    "navigation_expanded": True,
+    "show_sidebar": True,
+    "show_ui_builder": False,
+    "hide_apps": [],
+    "hide_models": [],
+
+    # ==========================================
+    # Sidebar Order
+    # ==========================================
+    "order_with_respect_to": [
+        "auth",
+        "courses",
+        "admissions",
+        "content",
+        "contacts",
+        "news",
+    ],
+
+    # ==========================================
+    # Top Menu
+    # ==========================================
+    "topmenu_links": [
+        {"model": "auth.User"},
+        {"app": "courses"},
+        {"app": "content"},
+        {"app": "contacts"},
+        {"app": "news"},
+        {"name": "Website", "url": "/", "new_window": True},
+    ],
+
+    # ==========================================
+    # Icons
+    # ==========================================
+    "icons": {
+
+        # Apps
+        "auth": "fas fa-user-shield",
+        "courses": "fas fa-graduation-cap",
+        "content": "fas fa-layer-group",
+        "contacts": "fas fa-address-book",
+        "news": "fas fa-newspaper",
+        "admissions": "fas fa-user-graduate",
+
+        # Authentication
+        "auth.user": "fas fa-users",
+        "auth.group": "fas fa-user-lock",
+
+        # Courses
+        "courses.course": "fas fa-book-open",
+        "courses.department": "fas fa-building",
+
+        # Contacts
+        "contacts.contactmessage": "fas fa-envelope-open-text",
+        "contacts.departmentcontact": "fas fa-phone-square-alt",
+
+        # Content
+        "content.announcement": "fas fa-bullhorn",
+        "content.eventitem": "fas fa-calendar-check",
+        "content.galleryitem": "fas fa-images",
+        "content.staffmember": "fas fa-user-tie",
+        "content.testimonial": "fas fa-comments",
+
+        # News
+        "news.newsarticle": "fas fa-newspaper",
+    },
+
+    # ==========================================
+    # Custom Links
+    # ==========================================
+    "custom_links": {
+        "courses": [{
+            "name": "Course Website",
+            "url": "/",
+            "icon": "fas fa-globe",
+        }],
+    },
+
+    # ==========================================
+    # Change Form
+    # ==========================================
+    "changeform_format": "horizontal_tabs",
+
+    # ==========================================
+    # Admin Index
+    # ==========================================
+    "show_sidebar": True,
+    "navigation_expanded": True,
+
+    # ==========================================
+    # Dashboard
+    # ==========================================
+    "default_icon_parents": "fas fa-folder",
+
+    "default_icon_children": "fas fa-circle",
+
+    # ==========================================
+    # Buttons
+    # ==========================================
+    "related_modal_active": True,
+
+    # ==========================================
+    # Language
+    # ==========================================
+    "language_chooser": False,
+}
+
