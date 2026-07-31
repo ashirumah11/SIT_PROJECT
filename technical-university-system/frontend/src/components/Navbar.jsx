@@ -1,20 +1,32 @@
 import { useState, useEffect, useRef } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link, useLocation } from 'react-router-dom'
 import logo from '../assets/ptvti-logo.jpg'
 
 const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
-  { label: 'Departments', to: '/courses' },
+  { label: 'Departments', to: '/courses', isDepartmentMenu: true },
   { label: 'Student Life', to: '/student-life' },
   { label: 'Gallery', to: '/gallery' },
   { label: 'Contact', to: '/contact' },
 ]
 
+const departmentMenuItems = [
+  { id: 'software-engineering', label: 'Engineering' },
+  { id: 'cosmetology-fundamentals', label: 'Cosmetology' },
+  { id: 'fashion-design', label: 'Fashion & Design' },
+  { id: 'hospitality-management', label: 'Hospitality' },
+  { id: 'ict-systems', label: 'ICT' },
+]
+
 const Navbar = () => {
   const [open, setOpen] = useState(false)
+  const [departmentMenuOpen, setDepartmentMenuOpen] = useState(false)
   const [hidden, setHidden] = useState(false)
   const lastScrollY = useRef(0)
+  const departmentMenuRef = useRef(null)
+  const location = useLocation()
+  const isDepartmentRoute = location.pathname === '/courses' || location.pathname.startsWith('/courses/')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +44,17 @@ const Navbar = () => {
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (departmentMenuRef.current && !departmentMenuRef.current.contains(event.target)) {
+        setDepartmentMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
   return (
@@ -54,19 +77,71 @@ const Navbar = () => {
       </div>
 
       <nav className={`nav-links ${open ? 'open' : ''}`}>
-        {navLinks.map((link) => (
-          <NavLink
-            key={link.to}
-            to={link.to}
-            end={link.to === '/'}
-            className={({ isActive }) =>
-              `nav-link ${isActive ? 'active' : ''}`
-            }
-            onClick={() => setOpen(false)}
-          >
-            {link.label}
-          </NavLink>
-        ))}
+        {navLinks.map((link) => {
+          if (link.isDepartmentMenu) {
+            return (
+              <div
+                key={link.to}
+                className="department-menu-wrapper"
+                ref={departmentMenuRef}
+                onMouseEnter={() => setDepartmentMenuOpen(true)}
+                onMouseLeave={() => setDepartmentMenuOpen(false)}
+              >
+                <button
+                  type="button"
+                  className={`nav-link department-menu-button ${departmentMenuOpen || isDepartmentRoute ? 'is-current' : ''}`}
+                  onClick={() => setDepartmentMenuOpen(true)}
+                  onMouseEnter={() => setDepartmentMenuOpen(true)}
+                  onFocus={() => setDepartmentMenuOpen(true)}
+                  aria-expanded={departmentMenuOpen}
+                  aria-label="Open department menu"
+                >
+                  {link.label}
+                </button>
+
+                <div
+                  className={`department-menu-panel ${departmentMenuOpen ? 'open' : ''}`}
+                  onMouseEnter={() => setDepartmentMenuOpen(true)}
+                  onMouseLeave={() => setDepartmentMenuOpen(false)}
+                >
+                  <div className="department-menu-panel-header">
+                    <span>Departments</span>
+                  </div>
+                  <Link to="/courses" className="department-menu-item department-menu-view-all" onClick={() => setDepartmentMenuOpen(false)}>
+                    View all departments
+                  </Link>
+                  {departmentMenuItems.map((department) => (
+                    <Link
+                      key={department.id}
+                      to={`/courses/${department.id}`}
+                      className="department-menu-item"
+                      onClick={() => setDepartmentMenuOpen(false)}
+                    >
+                      {department.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+
+          return (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end={link.to === '/'}
+              className={({ isActive }) =>
+                `nav-link ${isActive ? 'active' : ''}`
+              }
+              onClick={() => {
+                setOpen(false)
+                setDepartmentMenuOpen(false)
+              }}
+            >
+              {link.label}
+            </NavLink>
+          )
+        })}
       </nav>
 
       <div className="nav-actions">

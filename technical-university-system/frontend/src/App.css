@@ -198,6 +198,12 @@
   gap: 24px;
 }
 
+.department-menu-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
 .nav-link {
   color: var(--text-muted);
   text-decoration: none;
@@ -219,6 +225,86 @@
 }
 
 .nav-link:hover {
+  color: var(--text-inverse);
+}
+
+.department-menu-button {
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.department-menu-button.is-current,
+.department-menu-button:hover,
+.department-menu-button:focus-visible,
+.department-menu-button:active {
+  background: var(--brand);
+  color: var(--text-inverse);
+  border: 1px solid var(--brand);
+}
+
+.department-menu-panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: auto;
+  min-width: 220px;
+  background: rgba(27, 75, 29, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 12px 24px rgba(20, 43, 18, 0.12);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+  z-index: 30;
+}
+
+.department-menu-panel.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.department-menu-panel-header {
+  padding: 8px 10px 6px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.department-menu-item {
+  display: block;
+  padding: 11px 12px;
+  color: var(--text-inverse);
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.department-menu-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateX(2px);
+}
+
+.department-menu-view-all {
+  margin-top: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  font-weight: 700;
+}
+
+.department-menu-button:not(.active):hover,
+.department-menu-button:focus-visible {
+  background: var(--brand);
   color: var(--text-inverse);
 }
 
