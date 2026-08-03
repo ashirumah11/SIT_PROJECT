@@ -38,8 +38,8 @@
 /* Social Icons */
 .social-icons {
   display: flex;
-  gap: 16px;
-  margin-top: 12px;
+  gap: 14px;
+  margin-top: 24px;
 }
 
 .social-icon {

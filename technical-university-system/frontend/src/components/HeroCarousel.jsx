@@ -31,7 +31,14 @@ const HeroCarousel = ({
   showIndicators = true,
   autoplayInterval = 5500,
 }) => {
-  const slides = propSlides ?? defaultSlides
+  const slides = (propSlides && propSlides.length ? propSlides : defaultSlides).map((slide) => ({
+    id: slide.id ?? slide.slug ?? `${slide.title ?? 'slide'}-${Math.random()}`,
+    image: slide.image_url || slide.image || slide.src,
+    title: slide.title || 'Welcome to PTVTI',
+    subtitle: slide.subtitle || slide.description || 'Discover student-focused programs and practical learning.',
+    buttonText: slide.button_text || slide.buttonText,
+    buttonLink: slide.button_link || slide.buttonLink || '/courses',
+  }))
   const [index, setIndex] = useState(0)
   const timeoutRef = useRef(null)
 
@@ -82,9 +89,16 @@ const HeroCarousel = ({
             <h1 className="hero-title">{slides[index]?.title}</h1>
             <p className="hero-sub">{slides[index]?.subtitle}</p>
             <div className="hero-cta">
-              <a className="site-button" href="/courses">Explore programs</a>
-              <a className="site-button secondary" href="/prospectus.pdf" 
-              target="_blank" rel="noreferrer">Get Brochure</a>
+              {slides[index]?.buttonText && slides[index]?.buttonLink ? (
+                <a className="site-button" href={slides[index].buttonLink} target="_blank" rel="noreferrer">
+                  {slides[index].buttonText}
+                </a>
+              ) : (
+                <>
+                  <a className="site-button" href="/courses">Explore programs</a>
+                  <a className="site-button secondary" href="/prospectus.pdf" target="_blank" rel="noreferrer">Get Brochure</a>
+                </>
+              )}
             </div>
           </div>
         </div>

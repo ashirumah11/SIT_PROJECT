@@ -10,7 +10,10 @@ import heroWorkshopImage from '../assets/hero-workshop1.jpg'
 import nitaLogo from '../assets/nita-logo.png'
 import unescoLogo from '../assets/unesco-logo.png'
 import tvetaLogo from '../assets/tveta-logo.png'
-import { getNewsArticles, getTestimonials } from '../services/api.js'
+import heroCarousel1 from '../assets/hero-carousel1.jpg'
+import heroCarousel2 from '../assets/hero-carousel2.jpg'
+import heroCarousel3 from '../assets/hero-carousel3.jpg'
+import { getHeroCarouselItems, getNewsArticles, getTestimonials } from '../services/api.js'
 
 const highlights = [
   {
@@ -274,6 +277,27 @@ const NewsSection = ({ newsItems }) => {
 
 const Home = () => {
   // State variables cleanly scoped inside the Home component
+  const [heroSlides, setHeroSlides] = useState([
+    {
+      id: 'hero-1',
+      image: heroCarousel1,
+      title: 'Practical programs that prepare you for real-world technology careers',
+      subtitle: 'Learn with modern labs, project-based pathways, and dedicated student support.',
+    },
+    {
+      id: 'hero-2',
+      image: heroCarousel2,
+      title: 'Hands-on workshops & skilled instructors',
+      subtitle: 'Apply your learning in project work and real equipment.',
+    },
+    {
+      id: 'hero-3',
+      image: heroCarousel3,
+      title: 'Industry-aligned courses & placement support',
+      subtitle: 'Career coaching and internships to jumpstart your career.',
+    },
+  ])
+
   const [newsItems, setNewsItems] = useState([
     {
       id: 'news-1',
@@ -309,6 +333,26 @@ const Home = () => {
 
   // Fetch backend data once Home mounts
   useEffect(() => {
+    getHeroCarouselItems()
+      .then((items) => {
+        if (Array.isArray(items) && items.length > 0) {
+          setHeroSlides(
+            items
+              .filter((item) => item.is_active !== false)
+              .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+              .map((item) => ({
+                id: item.id,
+                image: item.image_url || item.image,
+                title: item.title,
+                subtitle: item.subtitle,
+                buttonText: item.button_text,
+                buttonLink: item.button_link,
+              }))
+          )
+        }
+      })
+      .catch((err) => console.error('Failed to fetch hero carousel items:', err))
+
     getNewsArticles()
       .then((items) => {
         if (Array.isArray(items) && items.length > 0) {
@@ -417,7 +461,7 @@ const Home = () => {
 
   return (
     <>
-      <HeroCarousel />
+      <HeroCarousel slides={heroSlides} />
 
       <section className="section-block section-alt">
         <div className="section-heading">

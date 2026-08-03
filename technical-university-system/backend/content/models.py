@@ -94,3 +94,23 @@ class GalleryItem(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class HeroCarouselItem(models.Model):
+    title = models.CharField(max_length=220)
+    subtitle = models.TextField(blank=True)
+    image = models.ImageField(upload_to='hero-carousel/', blank=True, null=True)
+    button_text = models.CharField(max_length=80, blank=True)
+    button_link = models.URLField(max_length=500, blank=True)
+    is_active = models.BooleanField(default=True)
+    order = models.PositiveIntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['order', '-created_at']
+        verbose_name = 'Hero Carousel Item'
+        verbose_name_plural = 'Hero Carousel Items'
+
+    def __str__(self):
+        return self.title

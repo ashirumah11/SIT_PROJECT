@@ -23,14 +23,31 @@ const Navbar = () => {
   const [open, setOpen] = useState(false)
   const [departmentMenuOpen, setDepartmentMenuOpen] = useState(false)
   const [hidden, setHidden] = useState(false)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
   const lastScrollY = useRef(0)
   const departmentMenuRef = useRef(null)
   const location = useLocation()
   const isDepartmentRoute = location.pathname === '/courses' || location.pathname.startsWith('/courses/')
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  useEffect(() => {
+    if (isMobile) {
+      setHidden(false)
+      return
+    }
+
     const handleScroll = () => {
       const currentScrollY = window.scrollY
+
       if (currentScrollY <= 80) {
         setHidden(false)
       } else if (currentScrollY > lastScrollY.current) {
@@ -38,13 +55,15 @@ const Navbar = () => {
       } else {
         setHidden(false)
       }
+
       lastScrollY.current = currentScrollY
     }
 
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
+
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isMobile])
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -84,15 +103,29 @@ const Navbar = () => {
                 key={link.to}
                 className="department-menu-wrapper"
                 ref={departmentMenuRef}
-                onMouseEnter={() => setDepartmentMenuOpen(true)}
-                onMouseLeave={() => setDepartmentMenuOpen(false)}
+                onMouseEnter={() => {
+                  if (!isMobile) setDepartmentMenuOpen(true)
+                }}
+                onMouseLeave={() => {
+                  if (!isMobile) setDepartmentMenuOpen(false)
+                }}
               >
                 <button
                   type="button"
                   className={`nav-link department-menu-button ${departmentMenuOpen || isDepartmentRoute ? 'is-current' : ''}`}
-                  onClick={() => setDepartmentMenuOpen(true)}
-                  onMouseEnter={() => setDepartmentMenuOpen(true)}
-                  onFocus={() => setDepartmentMenuOpen(true)}
+                  onClick={() => {
+                    if (isMobile) {
+                      setDepartmentMenuOpen(prev => !prev)
+                    } else {
+                      setDepartmentMenuOpen(true)
+                    }
+                  }}
+                  onMouseEnter={() => {
+                    if (!isMobile) setDepartmentMenuOpen(true)
+                  }}
+                  onFocus={() => {
+                    if (!isMobile) setDepartmentMenuOpen(true)
+                  }}
                   aria-expanded={departmentMenuOpen}
                   aria-label="Open department menu"
                 >
@@ -101,13 +134,24 @@ const Navbar = () => {
 
                 <div
                   className={`department-menu-panel ${departmentMenuOpen ? 'open' : ''}`}
-                  onMouseEnter={() => setDepartmentMenuOpen(true)}
-                  onMouseLeave={() => setDepartmentMenuOpen(false)}
+                  onMouseEnter={() => {
+                    if (!isMobile) setDepartmentMenuOpen(true)
+                  }}
+                  onMouseLeave={() => {
+                    if (!isMobile) setDepartmentMenuOpen(false)
+                  }}
                 >
                   <div className="department-menu-panel-header">
                     <span>Departments</span>
                   </div>
-                  <Link to="/courses" className="department-menu-item department-menu-view-all" onClick={() => setDepartmentMenuOpen(false)}>
+                  <Link
+                    to="/courses"
+                    className="department-menu-item department-menu-view-all"
+                    onClick={() => {
+                      setDepartmentMenuOpen(false)
+                      setOpen(false)
+                    }}
+                  >
                     View all departments
                   </Link>
                   {departmentMenuItems.map((department) => (
@@ -115,7 +159,10 @@ const Navbar = () => {
                       key={department.id}
                       to={`/courses/${department.id}`}
                       className="department-menu-item"
-                      onClick={() => setDepartmentMenuOpen(false)}
+                      onClick={() => {
+                        setDepartmentMenuOpen(false)
+                        setOpen(false)
+                      }}
                     >
                       {department.label}
                     </Link>

@@ -1,12 +1,13 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from .models import Announcement, StaffMember, EventItem, Testimonial, GalleryItem
+from .models import Announcement, StaffMember, EventItem, Testimonial, GalleryItem, HeroCarouselItem
 from .serializers import (
     AnnouncementSerializer,
     StaffMemberSerializer,
     EventItemSerializer,
     TestimonialSerializer,
     GalleryItemSerializer,
+    HeroCarouselItemSerializer,
 )
 
 class AnnouncementViewSet(viewsets.ModelViewSet):
@@ -48,6 +49,18 @@ class GalleryItemViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = GalleryItem.objects.all()
+        if self.action == 'list':
+            return queryset.filter(is_active=True)
+        return queryset
+
+
+class HeroCarouselItemViewSet(viewsets.ModelViewSet):
+    queryset = HeroCarouselItem.objects.all()
+    serializer_class = HeroCarouselItemSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        queryset = HeroCarouselItem.objects.all()
         if self.action == 'list':
             return queryset.filter(is_active=True)
         return queryset

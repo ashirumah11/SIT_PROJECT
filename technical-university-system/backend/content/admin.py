@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Announcement, StaffMember, EventItem, Testimonial, GalleryItem
+from .models import Announcement, StaffMember, EventItem, Testimonial, GalleryItem, HeroCarouselItem
 
 
 @admin.register(Announcement)
@@ -66,6 +66,37 @@ class GalleryItemAdmin(admin.ModelAdmin):
     list_filter = ('is_active', 'category')
     search_fields = ('title', 'alt_text', 'caption')
     ordering = ('order', '-created_at')
+
+    @admin.display(description='Image')
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="max-height: 40px; border-radius: 4px;"/>', obj.image.url)
+        return format_html('<span style="color: {};">{}</span>', 'red', '❌ No Image')
+
+
+@admin.register(HeroCarouselItem)
+class HeroCarouselItemAdmin(admin.ModelAdmin):
+    list_display = ('title', 'subtitle_preview', 'image_preview', 'button_text', 'is_active', 'order')
+    list_editable = ('is_active', 'order')
+    list_filter = ('is_active',)
+    search_fields = ('title', 'subtitle', 'button_text')
+    ordering = ('order', '-created_at')
+    readonly_fields = ('created_at', 'updated_at')
+    fields = (
+        'title',
+        'subtitle',
+        'image',
+        'button_text',
+        'button_link',
+        'is_active',
+        'order',
+        'created_at',
+        'updated_at',
+    )
+
+    @admin.display(description='Subtitle')
+    def subtitle_preview(self, obj):
+        return obj.subtitle[:60] if obj.subtitle else '—'
 
     @admin.display(description='Image')
     def image_preview(self, obj):

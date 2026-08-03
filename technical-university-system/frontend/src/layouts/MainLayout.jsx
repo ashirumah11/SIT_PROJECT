@@ -2,6 +2,7 @@ import { Outlet, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Navbar from '../components/Navbar.jsx'
 import Footer from '../components/Footer.jsx'
+import SocialLinks from '../components/SocialLinks.jsx'
 import { getAnnouncements } from '../services/api.js'
 
 const MainLayout = () => {
@@ -45,9 +46,7 @@ const MainLayout = () => {
             <span className="contact-icon">✉</span>
             {email}
           </span>
-          <div className="social-links">
-            ...
-          </div>
+          <SocialLinks />
         </div>
       </div>
       <Navbar />

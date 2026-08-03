@@ -38,6 +38,10 @@ export function getTestimonials() {
   return request('/content/testimonials/')
 }
 
+export function getHeroCarouselItems() {
+  return request('/content/hero-carousel/')
+}
+
 export function getEventItems() {
   return request('/content/events/')
 }
