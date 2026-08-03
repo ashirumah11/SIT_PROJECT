@@ -75,6 +75,29 @@
   line-height: 1.85;
 }
 
+.about-read-more-toggle {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--brand);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.about-read-more-toggle:hover,
+.about-read-more-toggle:focus-visible {
+  color: var(--accent);
+}
+
+.about-read-more-content {
+  display: inline;
+}
+
 .about-story-copy strong {
   color: var(--brand);
   font-weight: 700;
