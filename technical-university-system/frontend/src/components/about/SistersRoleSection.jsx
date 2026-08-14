@@ -14,7 +14,7 @@ export default function SistersRoleSection() {
       <div className="about-story-content">
         <div className="about-story-copy">
           <span className="about-eyebrow">The Poverelle Sisters</span>
-          <h1><i>"I keep them as sons and daughters".</i></h1>
+          <h1><i>"I take them as sons and daughters".</i></h1>
           <p>
             The Poverelle Sisters are the founders and custodians of PTVTI,
             carrying forward a mission that began in 1869 in Italy through 
@@ -26,14 +26,7 @@ export default function SistersRoleSection() {
             education, health, and social development—bringing that 
             same vision to life through PTVTI in Kiambu.
             </p>
-          <p>
-            At the heart of the institute are the evangelical values that define
-            the congregation: charity, compassion, love for the poor, dignity, and
-            respect. These principles shape every aspect of student life, creating
-            an environment where learners are nurtured not only academically but also
-            spiritually, morally, and socially.
-          </p>
-
+         
           {!showMore ? (
             <button
               type="button"
@@ -45,6 +38,14 @@ export default function SistersRoleSection() {
             </button>
           ) : (
             <>
+              <p>
+                 At the heart of the institute are the evangelical values that define
+                 the congregation: charity, compassion, love for the poor, dignity, and
+                 respect. These principles shape every aspect of student life, creating
+                 an environment where learners are nurtured not only academically but also
+                 spiritually, morally, and socially.
+              </p>
+
               <p>
                 Guided by their motto, <em>"I keep them as sons and daughters,"</em>
                 the Sisters are committed to providing a holistic formation that

@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import heroWorkshop from '../../assets/about-institute.jpg'
 
 export default function HeroSection() {
+  const [showMore, setShowMore] = useState(false)
+
   return (
     <section className="about-story-section">
       {/* The image below is also used as the low-opacity watermark at the bottom of this section. */}
@@ -23,15 +26,46 @@ export default function HeroSection() {
             PTVTI has continued to provide accessible, high-quality training that 
             empowers students to achieve their career goals.
           </p>
-          <p>
-            From Certificate to Diploma programmes across 
-            diverse technical and vocational fields, 
-            PTVTI combines hands-on learning, experienced trainers, 
-            and a supportive learning environment to prepare graduates for employment,
-            entrepreneurship, and lifelong success. As we continue to grow, 
-            we remain dedicated to shaping a skilled workforce that drives innovation,
-            economic development, and positive change in Kenya and beyond.
-          </p>
+          
+
+          {!showMore ? (
+            <button
+              type="button"
+              className="about-read-more-toggle"
+              onClick={() => setShowMore(true)}
+              aria-expanded={showMore}
+            >
+              Read more
+            </button>
+          ) : (
+            <>
+               <p>
+                 From Certificate to Diploma programmes across 
+                 diverse technical and vocational fields, 
+                 PTVTI combines hands-on learning, experienced trainers, 
+                 and a supportive learning environment to prepare graduates for employment,
+                 entrepreneurship, and lifelong success. As we continue to grow, 
+                 we remain dedicated to shaping a skilled workforce that drives innovation,
+                 economic development, and positive change in Kenya and beyond.
+             </p>
+              <p>
+                Our journey is rooted in a deep commitment to practical excellence,
+                community empowerment, and a learner-centered approach that helps each
+                student discover their potential. Through strong partnerships with
+                industry, supportive mentorship, and a focus on real-world skills,
+                PTVTI creates pathways for employment, entrepreneurship, and long-term
+                personal growth.
+              </p>
+              <button
+                type="button"
+                className="about-read-more-toggle"
+                onClick={() => setShowMore(false)}
+                aria-expanded={showMore}
+              >
+                Read less
+              </button>
+            </>
+          )}
         </div>
 
         <div className="about-story-image">

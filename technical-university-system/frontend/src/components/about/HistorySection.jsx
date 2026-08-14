@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import heroWorkshop from '../../assets/about-history.jpg'
 
 export default function HistorySection() {
+  const [showMore, setShowMore] = useState(false)
+
   return (
     <section className="about-story-section about-history-section">
       {/* The image below is also used as the low-opacity watermark at the bottom of this section. */}
@@ -26,17 +29,48 @@ export default function HistorySection() {
            the community has since grown into a center of excellence dedicated to 
            transforming lives through quality technical and vocational education.
           </p>
-          <p>
-            Over the past five years, PTVTI has empowered hundreds of young people 
-           with industry-relevant skills, preparing them for meaningful careers 
-           and entrepreneurship. Today, the institute proudly celebrates more 
-           than 100 graduates who are either employed in various industries or 
-           gaining valuable experience through industrial attachments. While 
-           the institute continues to grow, its commitment remains the same:
-           empowering young people with practical skills, fostering personal 
-           growth, and creating lasting opportunities that positively impact 
-           individuals, families, and the wider community.
-          </p>
+          
+
+          {!showMore ? (
+            <button
+              type="button"
+              className="about-read-more-toggle"
+              onClick={() => setShowMore(true)}
+              aria-expanded={showMore}
+            >
+              Read more
+            </button>
+          ) : (
+            <>
+              <p>
+               Over the past five years, PTVTI has empowered hundreds of young people 
+               with industry-relevant skills, preparing them for meaningful careers 
+               and entrepreneurship. Today, the institute proudly celebrates more 
+               than 100 graduates who are either employed in various industries or 
+               gaining valuable experience through industrial attachments. While 
+               the institute continues to grow, its commitment remains the same:
+               empowering young people with practical skills, fostering personal 
+               growth, and creating lasting opportunities that positively impact 
+               individuals, families, and the wider community.
+              </p>
+              <p>
+                The institute remains guided by a clear mission: to nurture capable,
+                compassionate, and job-ready graduates who can contribute meaningfully
+                to society. By continuing to invest in practical learning, mentorship,
+                and community-centered values, PTVTI is shaping a future where young
+                people are equipped not only to earn a living but to lead, serve, and
+                transform their communities.
+              </p>
+              <button
+                type="button"
+                className="about-read-more-toggle"
+                onClick={() => setShowMore(false)}
+                aria-expanded={showMore}
+              >
+                Read less
+              </button>
+            </>
+          )}
         </div>
       </div>
     </section>

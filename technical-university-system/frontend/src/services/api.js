@@ -50,6 +50,10 @@ export function getGalleryItems() {
   return request('/content/gallery/')
 }
 
+export function getStaffMembers() {
+  return request('/content/staff/')
+}
+
 export function submitContactMessage(payload) {
   return request('/contacts/messages/', {
     method: 'POST',

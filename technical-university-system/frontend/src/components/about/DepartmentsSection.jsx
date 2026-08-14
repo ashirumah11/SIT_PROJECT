@@ -5,8 +5,9 @@ import fashionImage from '../../assets/course-fashion.jpg'
 import cosmetologyImage from '../../assets/course-cosmetology.jpg'
 import ictImage from '../../assets/course-ict.jpg'
 import leaderImage from '../../assets/hero-workshop.jpg'
+import { getStaffMembers } from '../../services/api'
 
-const leaders = [
+const defaultLeaders = [
   {
     title: 'Hospitality & Catering',
     role: 'Head of Department',
@@ -56,6 +57,33 @@ export default function DepartmentsSection() {
   const [visibleSlides, setVisibleSlides] = useState(3)
   const [currentIndex, setCurrentIndex] = useState(3)
   const [isTransitioning, setIsTransitioning] = useState(true)
+  const [leaders, setLeaders] = useState(defaultLeaders)
+
+  useEffect(() => {
+    getStaffMembers()
+      .then((items) => {
+        if (!Array.isArray(items) || items.length === 0) return
+
+        const mappedStaff = items
+          .filter((member) => member.is_active !== false)
+          .sort((a, b) => (a.display_order ?? 0) - (b.display_order ?? 0) || a.name.localeCompare(b.name))
+          .map((member) => ({
+            title: member.department || 'Staff Member',
+            role: member.role || 'Team Member',
+            name: member.name,
+            image: member.image_url || member.image || leaderImage,
+            alt: `${member.name} profile photo`,
+          }))
+
+        if (mappedStaff.length > 0) {
+          setLeaders(mappedStaff)
+          setCurrentIndex(3)
+        }
+      })
+      .catch((error) => {
+        console.error('Failed to fetch staff members:', error)
+      })
+  }, [])
 
   const cloneCount = visibleSlides
   const infiniteLeaders = [

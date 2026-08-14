@@ -1,29 +1,34 @@
 export default function VisionMissionSection() {
   const coreValues = [
     {
-      title: 'Transformation',
-      icon: '🔄',
-      description: 'Changing lives through quality education'
-    },
-    {
-      title: 'Empowerment',
-      icon: '💪',
-      description: 'Equipping learners with practical skills'
-    },
-    {
-      title: 'Innovation',
-      icon: '⚡',
-      description: 'Driving industry-relevant solutions'
-    },
-    {
       title: 'Integrity',
-      icon: '✨',
-      description: 'Building trust and excellence'
+      icon: '🛡️',
+      description: 'Acting honestly and responsibly in every commitment'
     },
     {
-      title: 'Entrepreneurship',
-      icon: '🚀',
-      description: 'Creating opportunities for growth'
+      title: 'Respect',
+      icon: '🤝',
+      description: 'Honoring the dignity and worth of every person'
+    },
+    {
+      title: 'Love',
+      icon: '❤️',
+      description: 'Caring for others with compassion and kindness'
+    },
+    {
+      title: 'Understanding',
+      icon: '🧠',
+      description: 'Listening with empathy and seeking common ground'
+    },
+    {
+      title: 'Sharing',
+      icon: '🤲',
+      description: 'Giving generously and building community together'
+    },
+    {
+      title: 'Responsibility',
+      icon: '✅',
+      description: 'Taking ownership with commitment and accountability'
     }
   ];
 
@@ -34,14 +39,21 @@ export default function VisionMissionSection() {
           <span className="vision-mission-kicker">Our Vision</span>
           <div className="vision-mission-rule" aria-hidden="true" />
           <p>
-            To transform youth through training on technical, vocational and entrepreneurial skills, empower and promote them to serve the world.
+            Transformation in Youth life contributing
+            to the economic and social development of
+            the society, through skill based education 
+            that lead to students to employment and meets
+            the demand of labor market. 
           </p>
         </article>
         <article className="vision-mission-item">
           <span className="vision-mission-kicker">Our Mission</span>
           <div className="vision-mission-rule" aria-hidden="true" />
           <p>
-            To be the leading Technical and Vocational Center in Kenya that emphasizes on total transformation and empowering for the world.
+            To provide quality technical and vocational
+            training to all students irrespective of their
+            age, gender, race, tribe, orientation, religion
+            and social status.
           </p>
         </article>
       </div>

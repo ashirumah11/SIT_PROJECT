@@ -18,18 +18,18 @@ import { getHeroCarouselItems, getNewsArticles, getTestimonials } from '../servi
 const highlights = [
   {
     id: 'projects',
-    title: 'Project-based learning',
-    description: 'Build portfolio-ready solutions with real technical requirements and product feedback.',
+    title: 'Competency-Based Practical Training',
+    description: 'Students learn through hands-on workshop practice, real tasks, and skills-based assessment that prepares them for the workplace with confidence and competence.',
   },
   {
     id: 'mentorship',
-    title: 'Industry mentorship',
-    description: 'Learn from instructors who have shipped software at real companies and startups.',
+    title: 'Experienced Instructors & Mentorship',
+    description: 'Our trainers bring technical expertise, industry insight, and personal mentorship to support students in both learning and character development.',
   },
   {
     id: 'career-support',
-    title: 'Career support',
-    description: 'Get coaching, interview prep, and student success guidance from day one.',
+    title: 'Career Guidance & Industrial Attachment',
+    description: 'We connect learners to industrial attachment opportunities, career guidance, and practical exposure that strengthen employability and entrepreneurship readiness.',
   },
 ]
 
@@ -466,8 +466,8 @@ const Home = () => {
       <section className="section-block section-alt">
         <div className="section-heading">
           <span className="eyebrow">Why we stand out</span>
-          <h2>Designed for technical learners and career builders</h2>
-          <p>Every program combines practical labs, peer collaboration, and active career coaching.</p>
+          <h2>Why Students Choose PTVTI</h2>
+          <p>Our competency-based approach combines practical workshop training, experienced instructors, industrial attachment opportunities, and career guidance to prepare graduates for employment, entrepreneurship, and lifelong success.</p>
         </div>
 
         <div className="feature-grid">
