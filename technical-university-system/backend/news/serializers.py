@@ -13,6 +13,7 @@ class NewsArticleSerializer(serializers.ModelSerializer):
             'content',
             'author',
             'published_at',
+            'updated_at',
             'is_published',
         ]
-        read_only_fields = ['id', 'published_at']
+        read_only_fields = ['id', 'published_at', 'updated_at']

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import HeroCarousel from '../components/HeroCarousel.jsx'
 import CourseCard from '../components/CourseCard.jsx'
+import NewsCard from '../components/NewsCard.jsx'
 import engineeringImage from '../assets/course-engineering1.jpg'
 import fashionImage from '../assets/course-fashion1.jpg'
 import hospitalityImage from '../assets/course-hospitality1.jpg'
@@ -257,13 +258,7 @@ const NewsSection = ({ newsItems }) => {
           >
             {infiniteNews.map((item, index) => (
               <div key={`${item.id}-${index}`} className="news-slide">
-                <article className="news-card">
-                  <div className="news-card-head">
-                    <span className="news-card-date">{item.date}</span>
-                  </div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </article>
+                <NewsCard item={item} />
               </div>
             ))}
           </div>
@@ -359,11 +354,11 @@ const Home = () => {
           setNewsItems(
             items.map((item) => ({
               id: item.id,
-              date: item.published_at
-                ? new Date(item.published_at).toLocaleString('default', { month: 'short' })
-                : '',
+              date: item.updated_at
+                ? new Date(item.updated_at).toLocaleString('default', { month: 'short' })
+                : new Date(item.published_at).toLocaleString('default', { month: 'short' }),
               title: item.title,
-              description: item.summary || item.content || '',
+              description: item.content || item.summary || '',
             }))
           )
         }

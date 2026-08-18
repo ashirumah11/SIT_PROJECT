@@ -8,10 +8,11 @@ class NewsArticle(models.Model):
     content = models.TextField()
     author = models.CharField(max_length=120, blank=True)
     published_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ['-published_at']
+        ordering = ['-updated_at']
 
     def __str__(self):
         return self.title
