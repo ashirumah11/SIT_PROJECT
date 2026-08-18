@@ -18,10 +18,15 @@ class StaffMemberSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at', 'updated_at']
 
     def get_image_url(self, obj):
-        request = self.context.get('request')
-        if obj.image and hasattr(obj.image, 'url'):
-            return request.build_absolute_uri(obj.image.url) if request else obj.image.url
-        return None
+        try:
+            if obj.image and hasattr(obj.image, 'url'):
+                request = self.context.get('request')
+                if request:
+                    return request.build_absolute_uri(obj.image.url)
+                return obj.image.url
+            return None
+        except Exception:
+            return None
 
 
 class EventItemSerializer(serializers.ModelSerializer):
@@ -33,10 +38,15 @@ class EventItemSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at', 'updated_at']
 
     def get_image_url(self, obj):
-        request = self.context.get('request')
-        if obj.image and hasattr(obj.image, 'url'):
-            return request.build_absolute_uri(obj.image.url) if request else obj.image.url
-        return None
+        try:
+            if obj.image and hasattr(obj.image, 'url'):
+                request = self.context.get('request')
+                if request:
+                    return request.build_absolute_uri(obj.image.url)
+                return obj.image.url
+            return None
+        except Exception:
+            return None
 
 
 class TestimonialSerializer(serializers.ModelSerializer):
@@ -48,10 +58,15 @@ class TestimonialSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at']
 
     def get_image_url(self, obj):
-        request = self.context.get('request')
-        if obj.image and hasattr(obj.image, 'url'):
-            return request.build_absolute_uri(obj.image.url) if request else obj.image.url
-        return None
+        try:
+            if obj.image and hasattr(obj.image, 'url'):
+                request = self.context.get('request')
+                if request:
+                    return request.build_absolute_uri(obj.image.url)
+                return obj.image.url
+            return None
+        except Exception:
+            return None
 
 
 class GalleryItemSerializer(serializers.ModelSerializer):
@@ -63,10 +78,15 @@ class GalleryItemSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at', 'updated_at']
 
     def get_image_url(self, obj):
-        request = self.context.get('request')
-        if obj.image and hasattr(obj.image, 'url'):
-            return request.build_absolute_uri(obj.image.url) if request else obj.image.url
-        return None
+        try:
+            if obj.image and hasattr(obj.image, 'url'):
+                request = self.context.get('request')
+                if request:
+                    return request.build_absolute_uri(obj.image.url)
+                return obj.image.url
+            return None
+        except Exception:
+            return None
 
 
 class HeroCarouselItemSerializer(serializers.ModelSerializer):
@@ -78,7 +98,12 @@ class HeroCarouselItemSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at', 'updated_at']
 
     def get_image_url(self, obj):
-        request = self.context.get('request')
-        if obj.image and hasattr(obj.image, 'url'):
-            return request.build_absolute_uri(obj.image.url) if request else obj.image.url
-        return None
+        try:
+            if obj.image and hasattr(obj.image, 'url'):
+                request = self.context.get('request')
+                if request:
+                    return request.build_absolute_uri(obj.image.url)
+                return obj.image.url
+            return None
+        except Exception:
+            return None

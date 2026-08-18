@@ -20,9 +20,12 @@ class StaffMemberAdmin(admin.ModelAdmin):
 
     @admin.display(description='Image')
     def image_preview(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" style="max-height: 40px; border-radius: 4px;"/>', obj.image.url)
-        return format_html('<span style="color: {};">{}</span>', 'red', '❌ No Image')
+        try:
+            if obj.image:
+                return format_html('<img src="{}" style="max-height: 40px; border-radius: 4px;"/>', obj.image.url)
+            return format_html('<span style="color: red;">❌ No Image</span>')
+        except Exception:
+            return format_html('<span style="color: red;">❌ Error</span>')
 
 
 @admin.register(EventItem)
@@ -38,12 +41,29 @@ class EventItemAdmin(admin.ModelAdmin):
     list_filter = ('is_active', 'is_featured')
     search_fields = ('title', 'description', 'location')
     ordering = ('-starts_at',)
+    readonly_fields = ('created_at', 'updated_at', 'image_preview')
+    fields = (
+        'title',
+        'description',
+        'location',
+        'starts_at',
+        'ends_at',
+        'image',
+        'image_preview',
+        'is_featured',
+        'is_active',
+        'created_at',
+        'updated_at',
+    )
 
     @admin.display(description='Image')
     def image_preview(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" style="max-height: 40px; border-radius: 4px;"/>', obj.image.url)
-        return format_html('<span style="color: {};">{}</span>', 'red', '❌ No Image')
+        try:
+            if obj.image:
+                return format_html('<img src="{}" style="max-height: 200px; border-radius: 4px;"/>', obj.image.url)
+            return format_html('<span style="color: red;">❌ No Image</span>')
+        except Exception:
+            return format_html('<span style="color: red;">❌ Error</span>')
 
 
 @admin.register(Testimonial)
@@ -55,9 +75,12 @@ class TestimonialAdmin(admin.ModelAdmin):
 
     @admin.display(description='Image')
     def image_preview(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" style="max-height: 40px; border-radius: 4px;"/>', obj.image.url)
-        return format_html('<span style="color: {};">{}</span>', 'red', '❌ No Image')
+        try:
+            if obj.image:
+                return format_html('<img src="{}" style="max-height: 40px; border-radius: 4px;"/>', obj.image.url)
+            return format_html('<span style="color: red;">❌ No Image</span>')
+        except Exception:
+            return format_html('<span style="color: red;">❌ Error</span>')
 
 
 @admin.register(GalleryItem)
@@ -69,9 +92,12 @@ class GalleryItemAdmin(admin.ModelAdmin):
 
     @admin.display(description='Image')
     def image_preview(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" style="max-height: 40px; border-radius: 4px;"/>', obj.image.url)
-        return format_html('<span style="color: {};">{}</span>', 'red', '❌ No Image')
+        try:
+            if obj.image:
+                return format_html('<img src="{}" style="max-height: 40px; border-radius: 4px;"/>', obj.image.url)
+            return format_html('<span style="color: red;">❌ No Image</span>')
+        except Exception:
+            return format_html('<span style="color: red;">❌ Error</span>')
 
 
 @admin.register(HeroCarouselItem)
@@ -100,6 +126,9 @@ class HeroCarouselItemAdmin(admin.ModelAdmin):
 
     @admin.display(description='Image')
     def image_preview(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" style="max-height: 40px; border-radius: 4px;"/>', obj.image.url)
-        return format_html('<span style="color: {};">{}</span>', 'red', '❌ No Image')
+        try:
+            if obj.image:
+                return format_html('<img src="{}" style="max-height: 40px; border-radius: 4px;"/>', obj.image.url)
+            return format_html('<span style="color: red;">❌ No Image</span>')
+        except Exception:
+            return format_html('<span style="color: red;">❌ Error</span>')

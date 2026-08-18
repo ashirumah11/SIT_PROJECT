@@ -14,14 +14,14 @@ const SocialLinks = ({ className = 'social-links', iconClass = 'social-link' }) 
       </a>
 
       <a
-        href="https://x.com"
+        href="https://youtube.com"
         target="_blank"
         rel="noopener noreferrer"
         className={iconClass}
-        aria-label="X"
+        aria-label="YouTube"
       >
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M18.9 2h3.4l-7.5 8.6L22.9 22h-6.8l-5.3-7.2L4.7 22H1.3l8-9.2L1 2h7l4.8 6.5L18.9 2zm-1.2 18h1.9L7.2 3.9H5.2L17.7 20z" />
+          <path d="M23.5 6.2c-.3-1.1-1.2-2-2.3-2.3C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.2.4c-1.1.3-2 1.2-2.3 2.3C0 7.9 0 12 0 12s0 4.1.5 5.8c.3 1.1 1.2 2 2.3 2.3 1.7.4 9.2.4 9.2.4s7.5 0 9.2-.4c1.1-.3 2-1.2 2.3-2.3.5-1.7.5-5.8.5-5.8s0-4.1-.5-5.8zM9.5 16.5v-9l6.2 4.5-6.2 4.5z" />
         </svg>
       </a>
 
