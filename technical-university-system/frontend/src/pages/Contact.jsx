@@ -24,6 +24,12 @@ const LocationIcon = () => (
   </svg>
 )
 
+const HeartIcon = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path d="M12 20.25 3.73 12.7a5.7 5.7 0 0 1-.23-8.2 5.72 5.72 0 0 1 8.5.5 5.72 5.72 0 0 1 8.5-.5 5.7 5.7 0 0 1-.23 8.2L12 20.25Z" fill="currentColor" />
+  </svg>
+)
+
 const Contact = () => (
   <section className="contact-page">
     {/* Info Cards Section */}
@@ -31,12 +37,12 @@ const Contact = () => (
       <div className="info-card contact-info-card">
         <div className="info-icon"><EmailIcon /></div>
         <h3>Email Address</h3>
-        <p>info@palazollotechnical.co.ke</p>
+        <p>info@palazzolotechnical.co.ke</p>
       </div>
       <div className="info-card contact-info-card">
         <div className="info-icon"><PhoneIcon /></div>
         <h3>Phone</h3>
-        <p>0111380756</p>
+        <p>+254 111380756</p>
       </div>
       <div className="info-card contact-info-card">
         <div className="info-icon"><ClockIcon /></div>
@@ -50,24 +56,67 @@ const Contact = () => (
       </div>
     </div>
 
-    {/* Form and Map Section */}
+    {/* Contact and donations section */}
     <div className="contact-main-section">
-      <div className="contact-form-wrapper detail-card">
-        <h2>Keep In Touch</h2>
-        <p>Get in touch with our admissions team. We're here to help you with any questions about our programs.</p>
-        <ContactForm />
+      <div className="contact-details-card detail-card">
+        <div className="contact-form-wrapper">
+          <h2>Keep In Touch</h2>
+          <p>Get in touch with our admissions team. We're here to help you with any questions about our programs.</p>
+          <ContactForm />
+        </div>
+        <div className="contact-map-wrapper">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.9248231920367!2d36.7661557!3d-1.2125745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f23d77d04a0a5%3A0xe1c07109c5b30ad4!2sPalazzolo%20Technical%20and%20Vocational%20Training%20College!5e0!3m2!1sen!2ske!4v1710000000000"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
       </div>
-      <div className="contact-map-wrapper">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.3689!2d36.7696!3d-1.2240!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1sPalazzolo+Technical+and+Vocational+Training+College!2s0x182f23d77d04a0a5:0xe1c07109c5b30ad4!5e0!3m2!1sen!2s!4v1690000000000"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen=""
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
+    <section className="donation-section" aria-labelledby="donation-title">
+        <div className="donation-heading">
+          <span className="donation-kicker"><HeartIcon /> Give opportunity</span>
+          <h2 id="donation-title">Support Our Mission</h2>
+          <p>Your support helps us provide quality technical and vocational education, equip students, and build a better future.</p>
+        </div>
+
+        <div className="donation-options">
+          <article className="donation-card">
+            <div className="donation-card-icon donation-brand-mark donation-brand-mpesa" aria-label="M-PESA">
+              <span>M-PESA</span>
+            </div>
+            <h3>M-PESA</h3>
+            <p>PayBill Number</p>
+            <strong>880100</strong>
+            <p>Account Name</p>
+            <strong className="donation-detail">PAYPALAZZOLO</strong>
+            <a className="donation-button" href="tel:*334%23">Donate via M-PESA</a>
+          </article>
+
+          <article className="donation-card donation-card-bank">
+            <div className="donation-card-icon donation-brand-mark donation-brand-ncba" aria-label="NCBA">
+              <span>NCBA</span>
+            </div>
+            <h3>Bank Transfer</h3>
+            <p>Account Name</p>
+            <strong className="donation-detail">Palazzolo Technical &amp; Vocational Institute</strong>
+            <p>Bank: NCBA<br />Account Number: <strong>6566230047</strong></p>
+            <a className="donation-button" href="mailto:info@palazzolotechnical.co.ke?subject=Bank%20donation">Donate via Bank</a>
+          </article>
+
+          <article className="donation-card donation-card-kind">
+            <div className="donation-card-icon"><HeartIcon /></div>
+            <h3>Other Support</h3>
+            <p>You can also support us through in-kind donations or partnerships.</p>
+            <a className="donation-button" href="mailto:info@palazzolotechnical.co.ke?subject=Support%20our%20mission">Get in Touch</a>
+          </article>
+        </div>
+
+        <p className="donation-note">"Giving is not just about making a donation, it's about making a difference."</p>
+      </section>
     </div>
   </section>
 )
