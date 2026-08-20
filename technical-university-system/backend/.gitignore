@@ -1,0 +1,9 @@
+.env
+data.json
+
+*.sqlite3
+*.sqlite3.backup
+
+venv/
+__pycache__/
+*.pyc
