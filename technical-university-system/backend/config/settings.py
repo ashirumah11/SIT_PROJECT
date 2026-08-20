@@ -12,7 +12,10 @@ load_dotenv(BASE_DIR / '.env')
 
 SECRET_KEY = 'django-insecure-dev-key'
 DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = ['localhost',
+                '127.0.0.1', 
+                'wrongness-prude-calzone.ngrok-free.dev',
+                '[::1]']
 
 INSTALLED_APPS = [
     'jazzmin',
@@ -114,6 +117,7 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
+    'https://wrongness-prude-calzone.ngrok-free.dev',
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = False

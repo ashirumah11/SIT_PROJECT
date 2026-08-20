@@ -2,7 +2,7 @@ const SocialLinks = ({ className = 'social-links', iconClass = 'social-link' }) 
   return (
     <div className={className}>
       <a
-        href="https://facebook.com"
+        href="https://web.facebook.com/profile.php?id=61560170675898&_rdc=11&_rdr#"
         target="_blank"
         rel="noopener noreferrer"
         className={iconClass}
@@ -14,7 +14,7 @@ const SocialLinks = ({ className = 'social-links', iconClass = 'social-link' }) 
       </a>
 
       <a
-        href="https://youtube.com"
+        href="https://youtube.com/@st.louispalazzolotv?si=rWKx2OzkwOlIwmmp"
         target="_blank"
         rel="noopener noreferrer"
         className={iconClass}
@@ -38,7 +38,7 @@ const SocialLinks = ({ className = 'social-links', iconClass = 'social-link' }) 
       </a>
 
       <a
-        href="https://instagram.com"
+        href="https://www.instagram.com/palazzolotech?igsh=MXc4bnI0aDlsMXZ3dg%3D%3D&utm_source=qr"
         target="_blank"
         rel="noopener noreferrer"
         className={iconClass}

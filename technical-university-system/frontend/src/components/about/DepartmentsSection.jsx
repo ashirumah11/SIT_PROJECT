@@ -5,7 +5,7 @@ import fashionImage from '../../assets/course-fashion.jpg'
 import cosmetologyImage from '../../assets/course-cosmetology.jpg'
 import ictImage from '../../assets/course-ict.jpg'
 import leaderImage from '../../assets/hero-workshop.jpg'
-import { getStaffMembers } from '../../services/api'
+import { getStaffMembers, resolveMediaUrl } from '../../services/api'
 
 const defaultLeaders = [
   {
@@ -71,7 +71,7 @@ export default function DepartmentsSection() {
             title: member.department || 'Staff Member',
             role: member.role || 'Team Member',
             name: member.name,
-            image: member.image_url || member.image || leaderImage,
+            image: resolveMediaUrl(member.image_url) || resolveMediaUrl(member.image) || leaderImage,
             alt: `${member.name} profile photo`,
           }))
 

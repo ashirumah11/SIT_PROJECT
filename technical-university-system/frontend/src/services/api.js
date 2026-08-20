@@ -1,9 +1,32 @@
-// Use Vite's development proxy by default so browser requests stay same-origin.
-// Set VITE_API_BASE when deploying the frontend separately from the API.
-const API_BASE = import.meta.env.VITE_API_BASE || '/api/v1'
+// Use the ngrok API origin when provided; otherwise use the local Vite proxy.
+const apiUrl = import.meta.env.VITE_API_URL
+const API_BASE = apiUrl
+  ? `${apiUrl.replace(/\/$/, '')}/api/v1`
+  : import.meta.env.VITE_API_BASE || '/api/v1'
+
+export function resolveMediaUrl(url) {
+  if (!url || typeof url !== 'string' || url.trim() === '') return null
+
+  try {
+    const parsedUrl = new URL(url, window.location.origin)
+    const isLocalBackend = ['localhost', '127.0.0.1', '[::1]'].includes(parsedUrl.hostname)
+
+    if (isLocalBackend) {
+      return `${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}`
+    }
+
+    return parsedUrl.href
+  } catch {
+    return null
+  }
+}
 
 async function request(path, options = {}) {
   const headers = { ...(options.headers || {}) }
+
+  if (window.location.hostname.endsWith('.ngrok-free.dev') || window.location.hostname.endsWith('.ngrok.app')) {
+    headers['ngrok-skip-browser-warning'] = '1'
+  }
 
   // A Content-Type header on a body-less GET triggers an unnecessary CORS
   // preflight request. Only declare JSON when this request actually has a body.

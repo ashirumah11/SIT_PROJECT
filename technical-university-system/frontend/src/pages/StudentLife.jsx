@@ -1,22 +1,11 @@
 import { useState, useEffect } from 'react'
 import HeroCarousel from '../components/HeroCarousel.jsx'
-import { getEventItems } from '../services/api.js'
+import { getEventItems, resolveMediaUrl } from '../services/api.js'
 
 import studentLife1 from '../assets/student-life.jpg'
 import studentLife2 from '../assets/student-life2.jpg'
 import studentLife3 from '../assets/student-life3.jpg'
 import studentLife4 from '../assets/student-life4.jpg'
-
-const BACKEND_BASE_URL = 'http://localhost:8000'
-
-// Safely resolves absolute backend media URLs or falls back cleanly
-const normalizeImageUrl = (url) => {
-  if (!url || typeof url !== 'string' || url.trim() === '') return null
-  if (/^https?:\/\//.test(url)) return url
-  return url.startsWith('/')
-    ? `${BACKEND_BASE_URL}${url}`
-    : `${BACKEND_BASE_URL}/${url}`
-}
 
 const carouselImages = [
   { src: studentLife1, alt: 'Students gathered on campus' },
@@ -60,7 +49,7 @@ const StudentLife = () => {
               id: `api-${item.id ?? index}`,
               title: item.title,
               description: item.description,
-              image: normalizeImageUrl(rawImageUrl) || studentLife1,
+              image: resolveMediaUrl(rawImageUrl) || studentLife1,
             }
           })
 

@@ -14,7 +14,7 @@ import tvetaLogo from '../assets/tveta-logo.png'
 import heroCarousel1 from '../assets/hero-carousel1.jpg'
 import heroCarousel2 from '../assets/hero-carousel2.jpg'
 import heroCarousel3 from '../assets/hero-carousel3.jpg'
-import { getHeroCarouselItems, getNewsArticles, getTestimonials } from '../services/api.js'
+import { getHeroCarouselItems, getNewsArticles, getTestimonials, resolveMediaUrl } from '../services/api.js'
 
 const highlights = [
   {
@@ -337,7 +337,7 @@ const Home = () => {
               .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
               .map((item) => ({
                 id: item.id,
-                image: item.image_url || item.image,
+                image: resolveMediaUrl(item.image_url) || resolveMediaUrl(item.image),
                 title: item.title,
                 subtitle: item.subtitle,
                 buttonText: item.button_text,
@@ -371,7 +371,7 @@ const Home = () => {
           setTestimonials(
             items.map((item) => ({
               id: item.id,
-              image: item.image_url || heroWorkshopImage,
+              image: resolveMediaUrl(item.image_url) || resolveMediaUrl(item.image) || heroWorkshopImage,
               quote: item.quote,
               name: item.author,
               role: item.role || item.company || '',

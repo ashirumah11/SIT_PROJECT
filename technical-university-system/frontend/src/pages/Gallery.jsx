@@ -1,15 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getGalleryItems } from '../services/api.js'
-
-const BACKEND_BASE_URL = 'http://localhost:8000'
-
-const normalizeImageUrl = (url) => {
-  if (!url || typeof url !== 'string' || url.trim() === '') return null
-  if (/^https?:\/\//.test(url)) return url
-  return url.startsWith('/')
-    ? `${BACKEND_BASE_URL}${url}`
-    : `${BACKEND_BASE_URL}/${url}`
-}
+import { getGalleryItems, resolveMediaUrl } from '../services/api.js'
 
 const defaultGalleryImages = [
   {
@@ -66,7 +56,7 @@ const defaultGalleryImages = [
 const mergeGalleryImages = (items = []) => {
   const backendImages = items
     .map((item) => ({
-      src: normalizeImageUrl(item.image_url) || normalizeImageUrl(item.image) || '',
+      src: resolveMediaUrl(item.image_url) || resolveMediaUrl(item.image) || '',
       alt: item.alt_text || item.caption || item.title || 'Gallery image',
     }))
     .filter((image) => image.src)
