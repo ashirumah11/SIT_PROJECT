@@ -50,7 +50,7 @@ const courseDetails = {
     ],
     coursesOffered: [
       { name: 'ICT Full Course', duration: '12 months' },
-      { name: 'Short Course: Computer Packages and Basics', duration: '1 month', fee: 'KSH 5,000' },
+      { name: 'Short Course: Computer Packages', duration: '1 month', fee: 'KSH 5,000' },
       { name: 'Specialization: Graphic Design, Animation and Web Design', duration: '3-6 months', fee: 'KSH 54,500' },
     ],
     duration: '12 months',
@@ -81,8 +81,9 @@ const courseDetails = {
       'Basic hygiene and kitchen safety awareness',
     ],
     coursesOffered: [
-      { name: 'Pastry Production', duration: '9 months', fee: 'KSH 57,000' },
+      { name: 'Baking & Pastry Production', duration: '9 months', fee: 'KSH 57,000' },
       { name: 'Food & Beverage Production', duration: '9 months', fee: 'KSH 57,000' },
+      { name: 'Barista', duration: '3 months' },
       { name: 'Short/Customized Courses', duration: '3 months' },
     ],
     duration: '9 months',
