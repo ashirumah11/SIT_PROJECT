@@ -196,7 +196,7 @@ const Navbar = () => {
           Portal
         </button>
         <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSd7xoENz9pDaFgHlhPqdBQ6Io6BNlAQH3zQopXGq2A5BM0uig/viewform?usp=publish-editor"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSfGzWxMCWk0rbKXvd903Qyu4_7ScKuc2gQPBXmoB7_VkvQmCw/viewform?usp=publish-editor"
           className="nav-action-button apply-link"
           target="_blank"
           rel="noopener noreferrer"

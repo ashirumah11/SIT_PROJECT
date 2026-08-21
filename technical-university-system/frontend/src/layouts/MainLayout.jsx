@@ -23,7 +23,7 @@ const MainLayout = () => {
       .catch(() => {})
   }, [])
 
-  const message = announcement?.message ?? 'ADMISSIONS OPEN FOR SEPTEMBER 2026 INTAKE'
+  const message = announcement?.message ?? 'ADMISSIONS OPEN FOR SEPTEMBER INTAKE'
   const link = announcement?.link ?? '/prospectus.pdf'
   const phone = announcement?.phone ?? '+254 111380756'
   const email = announcement?.email ?? 'info@palazzolotechnical.co.ke'

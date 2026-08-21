@@ -92,7 +92,7 @@ const Contact = () => (
             <p>PayBill Number</p>
             <strong>880100</strong>
             <p>Account Name</p>
-            <strong className="donation-detail">PAYPALAZZOLO</strong>
+            <strong className="donation-detail">PAYPALAZZO</strong>
             <a className="donation-button" href="tel:*334%23">Donate via M-PESA</a>
           </article>
 

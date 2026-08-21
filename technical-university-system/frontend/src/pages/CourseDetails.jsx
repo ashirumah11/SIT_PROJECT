@@ -10,7 +10,8 @@ const courseDetails = {
     title: 'Engineering',
     description: 'A hands-on engineering department offering trade courses in construction, wiring, and plumbing.',
     requirements: [
-      'Minimum KCSE D or equivalent vocational qualification',
+      'KCSE or equivalent vocational certificate',
+      'Primary School Education Certificate (KCPE / KPSEA) or basic vocational training welcome',
       'Basic mathematics and technical drawing skills',
       'Interest in construction and facility services',
     ],
@@ -18,9 +19,10 @@ const courseDetails = {
       { name: 'Electrical Wireman', duration: '12 months', fee: 'KSH 76,500' },
       { name: 'Plumbing', duration: '12 months', fee: 'KSH 76,500' },
       { name: 'Masonry', duration: '12 months', fee: 'KSH 76,500' },
+      { name: 'Short/Customized Courses', duration: '3 months' },
     ],
     duration: '12 months',
-    level: 'Professional',
+    level: 'Certificate',
   },
   'cosmetology-fundamentals': {
     title: 'Cosmetology',
@@ -33,9 +35,10 @@ const courseDetails = {
     coursesOffered: [
       { name: 'Beauty Therapy', duration: '9 months', fee: 'KSH 55,500' },
       { name: 'Hairdressing', duration: '9 months', fee: 'KSH 55,500' },
+      { name: 'Short/Customized Courses', duration: '3 months' },
     ],
     duration: '9 months',
-    level: 'Specialized',
+    level: 'Certificate',
   },
   'ict-systems': {
     title: 'ICT',
@@ -46,12 +49,12 @@ const courseDetails = {
       'Interest in software tools and digital workflows',
     ],
     coursesOffered: [
-      { name: 'Graphic Design', duration: '9 months', fee: 'KSH 54,500' },
-      { name: 'Web/Mobile Design', duration: '9 months', fee: 'KSH 54,500' },
-      { name: 'Computer Packages', duration: '1 month', fee: 'KSH 5,000' },
+      { name: 'ICT Full Course', duration: '12 months' },
+      { name: 'Short Course: Computer Packages and Basics', duration: '1 month', fee: 'KSH 5,000' },
+      { name: 'Specialization: Graphic Design, Animation and Web Design', duration: '3-6 months', fee: 'KSH 54,500' },
     ],
-    duration: '9 months',
-    level: 'Technical',
+    duration: '12 months',
+    level: 'Certificate',
   },
   'fashion-design': {
     title: 'Fashion & Design',
@@ -64,9 +67,10 @@ const courseDetails = {
     coursesOffered: [
       { name: 'Tailoring', duration: '9 months', fee: 'KSH 53,500' },
       { name: 'Dressmaking', duration: '9 months', fee: 'KSH 53,500' },
+      { name: 'Short/Customized Courses', duration: '3 months' },
     ],
     duration: '9 months',
-    level: 'Technical',
+    level: 'Certificate',
   },
   'hospitality-management': {
     title: 'Hospitality',
@@ -79,9 +83,10 @@ const courseDetails = {
     coursesOffered: [
       { name: 'Pastry Production', duration: '9 months', fee: 'KSH 57,000' },
       { name: 'Food & Beverage Production', duration: '9 months', fee: 'KSH 57,000' },
+      { name: 'Short/Customized Courses', duration: '3 months' },
     ],
     duration: '9 months',
-    level: 'Professional',
+    level: 'Certificate',
   },
 }
 
@@ -164,7 +169,7 @@ const CourseDetails = () => {
             <div className="detail-actions">
               <a
                 className="nav-action-button apply-link"
-                href="https://docs.google.com/forms/d/e/1FAIpQLSd7xoENz9pDaFgHlhPqdBQ6Io6BNlAQH3zQopXGq2A5BM0uig/viewform?usp=publish-editor"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfGzWxMCWk0rbKXvd903Qyu4_7ScKuc2gQPBXmoB7_VkvQmCw/viewform?usp=publish-editor"
                 target="_blank"
                 rel="noopener noreferrer"
               >
