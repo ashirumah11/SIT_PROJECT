@@ -1428,6 +1428,26 @@
   align-items: center;
 }
 
+.course-card.department-custom:hover {
+  border-color: var(--department-color);
+}
+
+.course-card.department-custom .course-tag::before {
+  background: var(--department-color);
+}
+
+.course-card.department-custom .course-link {
+  background: var(--department-color);
+  border-color: var(--department-color);
+  color: #fff;
+}
+
+.course-card.department-custom .course-link:hover {
+  background: var(--surface);
+  border-color: var(--department-color);
+  color: var(--department-color);
+}
+
 .course-card.department-engineering:hover {
   border-color: #3c6dd1;
 }
@@ -1622,6 +1642,15 @@
 .course-details.department-fashion-design .detail-card,
 .course-details.department-hospitality .detail-card {
   border-width: 1.5px;
+}
+
+.course-details.department-custom .detail-card {
+  border-color: var(--department-color);
+  box-shadow: 0 24px 45px color-mix(in srgb, var(--department-color) 14%, transparent);
+}
+
+.course-details.department-custom .detail-card h3 {
+  color: var(--department-color);
 }
 
 .course-details.department-engineering .detail-card {

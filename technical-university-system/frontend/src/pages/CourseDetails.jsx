@@ -1,4 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { getDepartment, resolveMediaUrl } from '../services/api.js'
 import engineeringImage from '../assets/course-engineering1.jpg'
 import cosmetologyImage from '../assets/course-hairdressing.jpg'
 import fashionImage from '../assets/course-fashion1.jpg'
@@ -93,15 +95,56 @@ const courseDetails = {
 
 const CourseDetails = () => {
   const { id } = useParams()
-  const details = courseDetails[id]
+  const [dynamicDetails, setDynamicDetails] = useState(null)
+  const staticDetails = courseDetails[id]
+
+  useEffect(() => {
+    if (staticDetails || !/^\d+$/.test(id)) return
+
+    getDepartment(id).then((department) => {
+      const coursesOffered = (department.courses || []).map((course) => ({
+        name: course.title,
+        duration: course.duration_months
+          ? `${course.duration_months} month${course.duration_months === 1 ? '' : 's'}`
+          : course.duration_weeks
+            ? `${course.duration_weeks} week${course.duration_weeks === 1 ? '' : 's'}`
+            : 'Duration to be confirmed',
+      }))
+      setDynamicDetails({
+        title: department.name,
+        description: department.description || 'Explore practical training and career-focused skills in this department.',
+        image: resolveMediaUrl(department.image),
+        requirements: department.requirements
+          ? department.requirements.split(/\r?\n/).map((requirement) => requirement.trim()).filter(Boolean)
+          : ['Contact admissions for entry requirements and available programmes.'],
+        coursesOffered,
+        duration: department.duration_months ? `${department.duration_months} month${department.duration_months === 1 ? '' : 's'}` : 'Varies by programme',
+        level: 'Technical training',
+      })
+    }).catch(() => {})
+  }, [id, staticDetails])
+
+  const details = staticDetails || dynamicDetails
   const departmentClass = details?.title
     ? `department-${details.title
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, '-')
         .replace(/^-+|-+$/g, '')}`
     : ''
+  const departmentColors = {
+    Engineering: '#3c6dd1',
+    ICT: '#4ea08a',
+    'Fashion & Design': '#8457c7',
+    Beauty: '#e58bb5',
+    Cosmetology: '#e58bb5',
+    Hospitality: '#4ea08a',
+    Business: '#d5a928',
+    Electrical: '#e47b32',
+  }
+  const departmentColor = departmentColors[details?.title] || '#0f766e'
+  const isCustomDepartment = !departmentColors[details?.title]
 
-  const detailImage = {
+  const detailImage = details?.image || {
     Engineering: engineeringImage,
     Cosmetology: cosmetologyImage,
     ICT: ictImage,
@@ -122,7 +165,10 @@ const CourseDetails = () => {
   }
 
   return (
-    <section className={`section-block course-details ${departmentClass}`}>
+    <section
+      className={`section-block course-details ${departmentClass} ${isCustomDepartment ? 'department-custom' : ''}`}
+      style={{ '--department-color': departmentColor }}
+    >
       <div className="section-heading course-details-heading">
         <span className="eyebrow">Course details</span>
         <h2>{details.title}</h2>

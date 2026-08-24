@@ -1,12 +1,13 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import CourseCard from '../components/CourseCard.jsx'
 import engineeringImage from '../assets/course-engineering1.jpg'
 import fashionImage from '../assets/course-fashion1.jpg'
 import hospitalityImage from '../assets/course-hospitality1.jpg'
 import ictImage from '../assets/course-ict.jpg'
 import cosmetologyImage from '../assets/course-hairdressing.jpg'
+import { getDepartments, resolveMediaUrl } from '../services/api.js'
 
-const courses = [
+const fallbackDepartments = [
   {
     id: 'software-engineering',
     title: 'Engineering Department',
@@ -55,7 +56,65 @@ const courses = [
   },
 ]
 
+const departmentImages = {
+  engineering: engineeringImage,
+  electrical: engineeringImage,
+  plumbing: engineeringImage,
+  cosmetology: cosmetologyImage,
+  beauty: cosmetologyImage,
+  fashion: fashionImage,
+  hospitality: hospitalityImage,
+  ict: ictImage,
+}
+
+const toSlug = (value) => value.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-')
+const formatDuration = (months) => months ? `${months} month${months === 1 ? '' : 's'}` : 'View programmes'
+
+const mergeDepartments = (remoteDepartments) => {
+  const remoteByName = new Map(remoteDepartments.map((department) => [department.name.toLowerCase(), department]))
+  const existingNames = new Set(fallbackDepartments.map((department) => department.department.toLowerCase()))
+  const merged = fallbackDepartments.map((fallback) => {
+    const remote = remoteByName.get(fallback.department.toLowerCase())
+    if (!remote) return fallback
+
+    return {
+      ...fallback,
+      id: remote.id,
+      title: remote.name,
+      department: remote.name,
+      description: remote.description || fallback.description,
+      image: resolveMediaUrl(remote.image) || fallback.image,
+      duration: formatDuration(remote.duration_months) === 'View programmes' ? fallback.duration : formatDuration(remote.duration_months),
+    }
+  })
+
+  const added = remoteDepartments
+    .filter((department) => !existingNames.has(department.name.toLowerCase()))
+    .map((department) => ({
+      id: department.id,
+      title: department.name,
+      description: department.description || 'Explore practical training and career-focused skills in this department.',
+      duration: formatDuration(department.duration_months),
+      level: 'Technical training',
+      department: department.name,
+      image: resolveMediaUrl(department.image) || departmentImages[toSlug(department.name).split('-')[0]],
+    }))
+
+  return [...merged, ...added]
+}
+
 const Courses = () => {
+  const [departments, setDepartments] = useState(fallbackDepartments)
+
+  useEffect(() => {
+    getDepartments()
+      .then((data) => {
+        if (!Array.isArray(data) || data.length === 0) return
+        setDepartments(mergeDepartments(data))
+      })
+      .catch(() => {})
+  }, [])
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
@@ -71,7 +130,7 @@ const Courses = () => {
       </div>
 
       <div className="course-grid">
-        {courses.map((course) => (
+        {departments.map((course) => (
           <CourseCard key={course.id} course={course} />
         ))}
       </div>

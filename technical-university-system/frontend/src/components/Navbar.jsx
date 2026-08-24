@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { NavLink, Link, useLocation } from 'react-router-dom'
+import { getDepartments } from '../services/api.js'
 import logo from '../assets/ptvti-logo.jpg'
 
 const navLinks = [
@@ -19,15 +20,35 @@ const departmentMenuItems = [
   { id: 'ict-systems', label: 'ICT' },
 ]
 
+const mergeDepartmentMenuItems = (remoteDepartments) => {
+  const existingNames = new Set(departmentMenuItems.map((department) => department.label.toLowerCase()))
+  const addedDepartments = remoteDepartments
+    .filter((department) => !existingNames.has(department.name.toLowerCase()))
+    .map((department) => ({ id: department.id, label: department.name }))
+
+  return [...departmentMenuItems, ...addedDepartments]
+}
+
 const Navbar = () => {
   const [open, setOpen] = useState(false)
   const [departmentMenuOpen, setDepartmentMenuOpen] = useState(false)
   const [hidden, setHidden] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+  const [departments, setDepartments] = useState(departmentMenuItems)
   const lastScrollY = useRef(0)
   const departmentMenuRef = useRef(null)
   const location = useLocation()
   const isDepartmentRoute = location.pathname === '/courses' || location.pathname.startsWith('/courses/')
+
+  useEffect(() => {
+    getDepartments()
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setDepartments(mergeDepartmentMenuItems(data))
+        }
+      })
+      .catch(() => {})
+  }, [])
 
   useEffect(() => {
     const handleResize = () => {
@@ -154,7 +175,7 @@ const Navbar = () => {
                   >
                     View all departments
                   </Link>
-                  {departmentMenuItems.map((department) => (
+                  {departments.map((department) => (
                     <Link
                       key={department.id}
                       to={`/courses/${department.id}`}

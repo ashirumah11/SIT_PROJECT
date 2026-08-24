@@ -53,6 +53,14 @@ export function getAnnouncements() {
   return request('/content/announcements/')
 }
 
+export function getDepartments() {
+  return request('/courses/departments/')
+}
+
+export function getDepartment(id) {
+  return request(`/courses/departments/${id}/`)
+}
+
 export function getNewsArticles() {
   return request('/news/')
 }
