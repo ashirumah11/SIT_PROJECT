@@ -1,0 +1,147 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+<section class="dashboard-overview">
+    <div class="dashboard-heading">
+        <div>
+            <span class="dashboard-kicker">PTVTI ADMINISTRATION</span>
+            <h2>Welcome, {{ request.user.get_short_name|default:request.user.username }}</h2>
+            <p>Today is {{ dashboard_today|date:'l' }}, {{ dashboard_today|date:'d F Y' }}</p>
+            <small class="last-login">Last login: {% if request.user.last_login %}{{ request.user.last_login|timesince }} ago{% else %}First visit{% endif %}</small>
+        </div>
+        <a class="dashboard-website-link" href="/" target="_blank" rel="noopener">
+            <i class="fas fa-external-link-alt"></i> View website
+        </a>
+    </div>
+
+    <section class="notification-bar">
+        <div class="notification-title"><i class="fas fa-bell"></i><strong>Notifications</strong></div>
+        {% for notification in dashboard_notifications %}<a href="{% url notification.url %}" class="notification-item"><span class="notification-count">{{ notification.count }}</span><span>{{ notification.label }}</span></a>{% endfor %}
+    </section>
+
+    <section class="analytics-strip" aria-label="Institution analytics">
+        <a class="analytics-card analytics-students" href="{% url 'admin:admissions_admission_changelist' %}?status__exact=accepted"><i class="fas fa-user-graduate"></i><span><small>Students</small><strong>{{ dashboard_stats.students }}</strong></span></a>
+        <a class="analytics-card analytics-courses" href="{% url 'admin:courses_course_changelist' %}"><i class="fas fa-book-open"></i><span><small>Courses</small><strong>{{ dashboard_stats.courses }}</strong></span></a>
+        <a class="analytics-card analytics-messages" href="{% url 'admin:contacts_contactmessage_changelist' %}"><i class="fas fa-envelope"></i><span><small>Messages</small><strong>{{ dashboard_stats.total_messages }}</strong></span></a>
+        <a class="analytics-card analytics-news" href="{% url 'admin:news_newsarticle_changelist' %}"><i class="fas fa-newspaper"></i><span><small>News</small><strong>{{ dashboard_stats.news }}</strong></span></a>
+    </section>
+
+    <div class="dashboard-groups">
+        <section class="dashboard-group">
+            <h3><i class="fas fa-user-graduate"></i> Admissions</h3>
+            <div class="dashboard-stats">
+                <a class="dashboard-stat stat-admissions" href="{% url 'admin:admissions_admission_changelist' %}"><span><strong>{{ dashboard_stats.new_applications }}</strong><small>New applications</small></span></a>
+                <a class="dashboard-stat stat-pending" href="{% url 'admin:admissions_admission_changelist' %}?status__exact=pending"><span><strong>{{ dashboard_stats.pending_admissions }}</strong><small>Pending review</small></span></a>
+                <a class="dashboard-stat stat-accepted" href="{% url 'admin:admissions_admission_changelist' %}?status__exact=accepted"><span><strong>{{ dashboard_stats.accepted_admissions }}</strong><small>Approved</small></span></a>
+                <a class="dashboard-stat stat-rejected" href="{% url 'admin:admissions_admission_changelist' %}?status__exact=rejected"><span><strong>{{ dashboard_stats.rejected_admissions }}</strong><small>Rejected</small></span></a>
+            </div>
+        </section>
+        <section class="dashboard-group">
+            <h3><i class="fas fa-globe"></i> Website</h3>
+            <div class="dashboard-stats">
+                <a class="dashboard-stat stat-courses" href="{% url 'admin:courses_course_changelist' %}"><span><strong>{{ dashboard_stats.courses }}</strong><small>Courses</small></span></a>
+                <a class="dashboard-stat stat-news" href="{% url 'admin:news_newsarticle_changelist' %}"><span><strong>{{ dashboard_stats.news }}</strong><small>News articles</small></span></a>
+                <a class="dashboard-stat stat-announcements" href="{% url 'admin:content_announcement_changelist' %}"><span><strong>{{ dashboard_stats.announcements }}</strong><small>Announcements</small></span></a>
+                <a class="dashboard-stat stat-events" href="{% url 'admin:content_eventitem_changelist' %}"><span><strong>{{ dashboard_stats.upcoming_events }}</strong><small>Upcoming events</small></span></a>
+            </div>
+        </section>
+        <section class="dashboard-group">
+            <h3><i class="fas fa-users"></i> People</h3>
+            <div class="dashboard-stats dashboard-stats-three">
+                <a class="dashboard-stat stat-staff" href="{% url 'admin:content_staffmember_changelist' %}"><span><strong>{{ dashboard_stats.staff }}</strong><small>Staff members</small></span></a>
+                <a class="dashboard-stat stat-contacts" href="{% url 'admin:contacts_departmentcontact_changelist' %}"><span><strong>{{ dashboard_stats.department_contacts }}</strong><small>Department contacts</small></span></a>
+                <a class="dashboard-stat stat-testimonials" href="{% url 'admin:content_testimonial_changelist' %}"><span><strong>{{ dashboard_stats.testimonials }}</strong><small>Testimonials</small></span></a>
+            </div>
+        </section>
+        <section class="dashboard-group">
+            <h3><i class="fas fa-comments"></i> Communication</h3>
+            <div class="dashboard-stats dashboard-stats-two">
+                <a class="dashboard-stat stat-messages" href="{% url 'admin:contacts_contactmessage_changelist' %}?status__exact=new"><span><strong>{{ dashboard_stats.unread_messages }}</strong><small>Unread messages</small></span></a>
+                <a class="dashboard-stat stat-total-messages" href="{% url 'admin:contacts_contactmessage_changelist' %}"><span><strong>{{ dashboard_stats.total_messages }}</strong><small>Total messages</small></span></a>
+            </div>
+        </section>
+    </div>
+
+    <div class="dashboard-widgets">
+        <div class="dashboard-panel trend-panel">
+            <div class="panel-title"><h3><i class="fas fa-chart-line"></i> Admissions trend</h3><span>Last 6 months</span></div>
+            <div class="trend-chart" aria-label="Admissions over the last six months">
+                {% for month in admissions_trend %}
+                <div class="trend-column"><span class="trend-value">{{ month.count }}</span><div class="trend-bar-wrap"><div class="trend-bar" style="height: {{ month.height }}%;"></div></div><small>{{ month.label }}</small></div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="dashboard-panel">
+            <div class="panel-title"><h3><i class="fas fa-inbox"></i> Recent contact messages</h3><a href="{% url 'admin:contacts_contactmessage_changelist' %}">View all</a></div>
+            {% for message in recent_messages %}
+            <div class="dashboard-row"><span class="row-avatar">{{ message.name|first|upper }}</span><span class="row-main"><b>{{ message.name }}</b><small>{{ message.subject }}</small></span><time class="row-time">{{ message.created_at|timesince }} ago</time></div>
+            {% empty %}<p class="dashboard-empty">No contact messages have been received yet.</p>{% endfor %}
+        </div>
+        <div class="dashboard-panel">
+            <div class="panel-title"><h3><i class="fas fa-calendar-alt"></i> Upcoming events</h3><a href="{% url 'admin:content_eventitem_changelist' %}">Manage</a></div>
+            {% for event in upcoming_events_list %}
+            <div class="dashboard-row"><span class="row-check"><i class="fas fa-check"></i></span><span class="row-main"><b>{{ event.title }}</b><small>{{ event.starts_at|date:'d M' }}{% if event.location %} · {{ event.location }}{% endif %}</small></span></div>
+            {% empty %}<p class="dashboard-empty">No upcoming events are scheduled.</p>{% endfor %}
+        </div>
+    </div>
+
+    <div class="utility-widgets">
+        <section class="dashboard-panel calendar-panel">
+            <div class="panel-title"><h3><i class="fas fa-calendar-alt"></i> {{ calendar_month }}</h3><a href="{% url 'admin:content_eventitem_changelist' %}">Manage events</a></div>
+            <div class="calendar-grid">
+                {% for weekday in calendar_weekdays %}<b class="calendar-weekday">{{ weekday }}</b>{% endfor %}
+                {% for week in calendar_weeks %}{% for cell in week %}<div class="calendar-day{% if cell.day == dashboard_today.day %} is-today{% endif %}{% if not cell.day %} is-empty{% endif %}"><span>{{ cell.day }}</span>{% for event in cell.events %}<a href="{% url 'admin:content_eventitem_changelist' %}">{{ event }}</a>{% endfor %}</div>{% endfor %}{% endfor %}
+            </div>
+        </section>
+        <section class="dashboard-panel export-panel">
+            <div class="panel-title"><h3><i class="fas fa-file-export"></i> Export admissions</h3></div>
+            <p>Download the complete admissions register for reporting and sharing.</p>
+            <div class="export-actions"><a href="{% url 'admin:admission_export_pdf' %}" class="export-action export-pdf"><i class="fas fa-file-pdf"></i><span>PDF</span></a><a href="{% url 'admin:admission_export_excel' %}" class="export-action export-excel"><i class="fas fa-file-excel"></i><span>Excel</span></a><a href="{% url 'admin:admission_export_csv' %}" class="export-action export-csv"><i class="fas fa-file-csv"></i><span>CSV</span></a></div>
+        </section>
+    </div>
+</section>
+{{ block.super }}
+{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    .dashboard-overview { margin-bottom: 2rem; }
+    .dashboard-heading { align-items: center; display: flex; justify-content: space-between; margin-bottom: 1.5rem; }
+    .dashboard-kicker { color: #0f766e; font-size: .72rem; font-weight: 800; letter-spacing: .12em; }
+    .dashboard-heading h2 { color: #102a43; font-size: 1.8rem; margin: .3rem 0; }
+    .dashboard-heading p { color: #627d98; margin: 0; }
+    .last-login { color: #829ab1; display: block; margin-top: .45rem; }
+    .dashboard-website-link { background: #102a43; border-radius: 5px; color: #fff; padding: .7rem 1rem; }
+    .notification-bar { align-items: center; background: #fff; border-left: 4px solid #f59e0b; border-radius: 5px; box-shadow: 0 2px 12px #102a4314; display: flex; flex-wrap: wrap; gap: .8rem 1.2rem; margin-bottom: 1.5rem; padding: .9rem 1rem; }.notification-title { align-items: center; color: #102a43; display: flex; gap: .45rem; margin-right: .3rem; }.notification-title i { color: #f59e0b; }.notification-item { align-items: center; color: #627d98; display: flex; font-size: .82rem; gap: .4rem; }.notification-item:hover { color: #0f766e; }.notification-count { align-items: center; background: #e6fffa; border-radius: 50%; color: #0f766e; display: flex; font-size: .72rem; font-weight: 800; height: 1.45rem; justify-content: center; width: 1.45rem; }
+    .analytics-strip { display: grid; gap: 1rem; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 1.75rem; }
+    .analytics-card { align-items: center; background: #fff; border-radius: 5px; box-shadow: 0 2px 12px #102a4314; display: flex; gap: 1rem; padding: 1.25rem; }.analytics-card i { align-items: center; border-radius: 50%; display: flex; font-size: 1.1rem; height: 2.6rem; justify-content: center; width: 2.6rem; }.analytics-card small, .analytics-card strong { display: block; }.analytics-card small { color: #627d98; font-size: .82rem; }.analytics-card strong { color: #102a43; font-size: 1.8rem; line-height: 1.15; margin-top: .2rem; }.analytics-students { border-top: 3px solid #0f766e; }.analytics-students i { background: #ccfbf1; color: #0f766e; }.analytics-courses { border-top: 3px solid #2563eb; }.analytics-courses i { background: #dbeafe; color: #2563eb; }.analytics-messages { border-top: 3px solid #ea580c; }.analytics-messages i { background: #ffedd5; color: #ea580c; }.analytics-news { border-top: 3px solid #db2777; }.analytics-news i { background: #fce7f3; color: #db2777; }
+    .dashboard-group { margin-bottom: 1.5rem; }.dashboard-group h3 { align-items: center; color: #102a43; display: flex; font-size: 1.05rem; gap: .55rem; margin: 0 0 .7rem; }.dashboard-group h3 i { color: #0f766e; font-size: .95rem; }
+    .dashboard-stats { display: grid; gap: 1rem; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .dashboard-stat { align-items: center; background: #fff; border-left: 4px solid; border-radius: 5px; box-shadow: 0 2px 12px #102a4314; display: flex; gap: .9rem; padding: 1.15rem; }
+    .dashboard-stat i { font-size: 1.25rem; }
+    .dashboard-stat strong, .dashboard-stat small { display: block; }
+    .dashboard-stat strong { color: #102a43; font-size: 1.55rem; line-height: 1.1; }
+    .dashboard-stat small { color: #627d98; margin-top: .25rem; }
+    .stat-admissions { border-color: #f59e0b; }.stat-admissions i { color: #b45309; }
+    .stat-pending { border-color: #f59e0b; }.stat-accepted { border-color: #16a34a; }.stat-rejected { border-color: #dc2626; }
+    .stat-courses { border-color: #0f766e; }.stat-courses i { color: #0f766e; }
+    .stat-messages { border-color: #2563eb; }.stat-messages i { color: #2563eb; }
+    .stat-news { border-color: #db2777; }.stat-news i { color: #db2777; }
+    .stat-announcements { border-color: #7c3aed; }.stat-events { border-color: #0891b2; }.stat-staff { border-color: #475569; }.stat-contacts { border-color: #ea580c; }.stat-testimonials { border-color: #db2777; }.stat-total-messages { border-color: #64748b; }
+    .dashboard-widgets { display: grid; gap: 1rem; grid-template-columns: 1.1fr 1fr 1fr; margin-top: 1rem; }
+    .dashboard-panel { background: #fff; border-radius: 5px; box-shadow: 0 2px 12px #102a4314; padding: 1.25rem; }
+    .panel-title { align-items: center; border-bottom: 1px solid #e6eef5; display: flex; justify-content: space-between; margin-bottom: .4rem; padding-bottom: .75rem; }.panel-title h3 { color: #102a43; font-size: 1.05rem; margin: 0; }.panel-title h3 i { color: #0f766e; margin-right: .35rem; }.panel-title a, .panel-title > span { color: #0f766e; font-size: .78rem; font-weight: 700; }
+    .trend-chart { align-items: end; display: flex; gap: .7rem; height: 12rem; justify-content: space-around; padding-top: 1rem; }.trend-column { align-items: center; display: flex; flex: 1; flex-direction: column; height: 100%; justify-content: end; }.trend-value { color: #627d98; font-size: .75rem; font-weight: 700; margin-bottom: .25rem; }.trend-bar-wrap { align-items: end; background: #e6fffa; display: flex; height: 8rem; justify-content: center; width: 70%; }.trend-bar { background: linear-gradient(180deg, #0f766e, #14b8a6); min-height: .4rem; width: 100%; }.trend-column small { color: #829ab1; font-size: .72rem; margin-top: .45rem; }
+    .dashboard-row { align-items: center; border-bottom: 1px solid #f0f4f8; display: flex; gap: .75rem; padding: .75rem 0; }.dashboard-row:last-child { border-bottom: 0; }
+    .row-avatar, .row-date { align-items: center; background: #e6fffa; border-radius: 50%; color: #0f766e; display: flex; font-weight: 800; height: 2.1rem; justify-content: center; width: 2.1rem; }
+    .row-date { border-radius: 4px; flex-direction: column; height: 2.7rem; line-height: 1; }.row-date small { font-size: .62rem; text-transform: uppercase; }
+    .row-main { flex: 1; min-width: 0; }.row-main b, .row-main small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }.row-main b { color: #243b53; }.row-main small { color: #829ab1; margin-top: .2rem; }.row-time { color: #829ab1; font-size: .72rem; white-space: nowrap; }.row-check { align-items: center; background: #dcfce7; border-radius: 50%; color: #15803d; display: flex; height: 2.1rem; justify-content: center; width: 2.1rem; }
+    .row-status { border-radius: 999px; font-size: .72rem; font-weight: 700; padding: .3rem .55rem; }.status-pending { background: #fef3c7; color: #92400e; }.status-accepted { background: #dcfce7; color: #166534; }.status-rejected { background: #fee2e2; color: #991b1b; }
+    .dashboard-empty { color: #829ab1; padding: .75rem 0; }
+    .utility-widgets { display: grid; gap: 1rem; grid-template-columns: 1.4fr 1fr; margin-top: 1rem; }.calendar-grid { display: grid; gap: 3px; grid-template-columns: repeat(7, minmax(0, 1fr)); }.calendar-weekday { color: #829ab1; font-size: .72rem; padding: .35rem; text-align: center; }.calendar-day { background: #f8fafc; border: 1px solid #edf2f7; min-height: 3.5rem; padding: .35rem; }.calendar-day > span { color: #486581; display: block; font-size: .75rem; font-weight: 700; }.calendar-day.is-today { background: #e6fffa; border-color: #5eead4; }.calendar-day.is-today > span { color: #0f766e; }.calendar-day.is-empty { background: transparent; border-color: transparent; }.calendar-day a { color: #0f766e; display: block; font-size: .62rem; margin-top: .25rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }.export-panel p { color: #627d98; font-size: .88rem; line-height: 1.5; }.export-actions { display: flex; gap: .7rem; margin-top: 1.5rem; }.export-action { align-items: center; border: 1px solid #d9e2ec; border-radius: 5px; display: flex; flex: 1; flex-direction: column; gap: .45rem; padding: 1rem .5rem; }.export-action i { font-size: 1.35rem; }.export-action span { color: #243b53; font-size: .78rem; font-weight: 700; }.export-pdf i { color: #dc2626; }.export-excel i { color: #15803d; }.export-csv i { color: #2563eb; }
+    @media (max-width: 1100px) { .analytics-strip, .dashboard-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }.dashboard-widgets, .utility-widgets { grid-template-columns: 1fr 1fr; }.trend-panel { grid-column: span 2; } }
+    @media (max-width: 600px) { .dashboard-heading { align-items: flex-start; flex-direction: column; gap: 1rem; }.analytics-strip, .dashboard-stats, .dashboard-widgets, .utility-widgets { grid-template-columns: 1fr; }.trend-panel { grid-column: auto; }.notification-bar { align-items: flex-start; flex-direction: column; } }
+</style>
+{% endblock %}

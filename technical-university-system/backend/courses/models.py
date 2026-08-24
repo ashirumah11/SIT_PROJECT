@@ -4,6 +4,9 @@ from django.db import models
 class Department(models.Model):
     name = models.CharField(max_length=120)
     description = models.TextField(blank=True)
+    requirements = models.TextField(blank=True, help_text='Enter one requirement per line.')
+    image = models.ImageField(upload_to='departments/', blank=True, null=True)
+    duration_months = models.PositiveIntegerField(default=0, help_text='Program duration in months.')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -25,6 +28,7 @@ class Course(models.Model):
         blank=True,
     )
     description = models.TextField(blank=True)
+    duration_months = models.PositiveIntegerField(default=0, help_text='Course duration in months.')
     duration_weeks = models.PositiveIntegerField(default=0)
     credits = models.PositiveSmallIntegerField(default=0)
     is_active = models.BooleanField(default=True)

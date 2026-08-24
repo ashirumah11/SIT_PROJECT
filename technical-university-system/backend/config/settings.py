@@ -87,13 +87,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'config.context_processors.admin_dashboard',
             ],
         },
     },
@@ -129,9 +130,10 @@ JAZZMIN_SETTINGS = {
     "site_title": "PTVTI Administration",
     "site_header": "Palazzolo Technical & Vocational Training Institute",
     "site_brand": "PTVTI CMS",
-    "site_logo": None,
-    "login_logo": None,
-    "welcome_sign": "Welcome to PTVTI Administration",
+    "site_logo": "content/ptvti-logo.jpg",
+    "login_logo": "content/ptvti-logo.jpg",
+    "custom_css": "content/admin_theme.css",
+    "welcome_sign": "Administration Portal",
     "copyright": "© Palazzolo Technical & Vocational Training Institute",
 
     # ==========================================
@@ -140,6 +142,7 @@ JAZZMIN_SETTINGS = {
     "navigation_expanded": True,
     "show_sidebar": True,
     "show_ui_builder": False,
+    "show_theme_chooser": True,
     "hide_apps": [],
     "hide_models": [],
 
@@ -250,9 +253,10 @@ JAZZMIN_SETTINGS = {
     "site_title": "PTVTI Administration",
     "site_header": "Palazzolo Technical & Vocational Training Institute",
     "site_brand": "PTVTI CMS",
-    "site_logo": None,
-    "login_logo": None,
-    "welcome_sign": "Welcome to PTVTI Administration",
+    "site_logo": "content/ptvti-logo.jpg",
+    "login_logo": "content/ptvti-logo.jpg",
+    "custom_css": "content/admin_theme.css",
+    "welcome_sign": "Administration Portal",
     "copyright": "© Palazzolo Technical & Vocational Training Institute",
 
     # ==========================================
@@ -261,6 +265,7 @@ JAZZMIN_SETTINGS = {
     "navigation_expanded": True,
     "show_sidebar": True,
     "show_ui_builder": False,
+    "show_theme_chooser": True,
     "hide_apps": [],
     "hide_models": [],
 

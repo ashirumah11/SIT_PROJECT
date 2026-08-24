@@ -1,0 +1,70 @@
+:root {
+    --ptvti-topbar-text: #243b53;
+    --ptvti-topbar-muted: #627d98;
+    --ptvti-shortcut-text: #102a43;
+    --ptvti-shortcut-muted: #627d98;
+}
+
+[data-bs-theme="dark"] {
+    --ptvti-topbar-text: #f0f4f8;
+    --ptvti-topbar-muted: #bcccdc;
+    --ptvti-shortcut-text: #f0f4f8;
+    --ptvti-shortcut-muted: #bcccdc;
+}
+
+.main-header .navbar,
+.main-header .navbar .nav-link,
+.main-header .navbar .navbar-brand,
+.main-header .navbar .dropdown-toggle {
+    color: var(--ptvti-topbar-text) !important;
+}
+
+.main-header .navbar .nav-link:hover,
+.main-header .navbar .nav-link:focus,
+.main-header .navbar .dropdown-toggle:hover,
+.main-header .navbar .dropdown-toggle:focus {
+    color: #14b8a6 !important;
+}
+
+.dashboard-overview .analytics-card,
+.dashboard-overview .dashboard-stat,
+.dashboard-overview .dashboard-panel,
+.dashboard-overview .dashboard-group h3,
+.dashboard-overview .panel-title h3 {
+    color: var(--ptvti-shortcut-text);
+}
+
+.dashboard-overview .analytics-card strong,
+.dashboard-overview .dashboard-stat strong,
+.dashboard-overview .panel-title h3,
+.dashboard-overview .dashboard-group h3,
+.dashboard-overview .search-result b,
+.dashboard-overview .row-main b {
+    color: var(--ptvti-shortcut-text) !important;
+}
+
+.dashboard-overview .analytics-card small,
+.dashboard-overview .dashboard-stat small,
+.dashboard-overview .panel-title > span,
+.dashboard-overview .row-main small,
+.dashboard-overview .row-time,
+.dashboard-overview .dashboard-empty,
+.dashboard-overview .export-panel p {
+    color: var(--ptvti-shortcut-muted) !important;
+}
+
+[data-bs-theme="dark"] .dashboard-overview .analytics-card,
+[data-bs-theme="dark"] .dashboard-overview .dashboard-stat,
+[data-bs-theme="dark"] .dashboard-overview .dashboard-panel,
+[data-bs-theme="dark"] .dashboard-overview .global-search,
+[data-bs-theme="dark"] .dashboard-overview .notification-bar {
+    background: #1f2937;
+    border-color: #475569;
+}
+
+[data-bs-theme="dark"] .dashboard-overview .analytics-card strong,
+[data-bs-theme="dark"] .dashboard-overview .dashboard-stat strong,
+[data-bs-theme="dark"] .dashboard-overview .panel-title h3,
+[data-bs-theme="dark"] .dashboard-overview .dashboard-group h3 {
+    color: var(--ptvti-shortcut-text) !important;
+}

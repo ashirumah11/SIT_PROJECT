@@ -1,0 +1,10 @@
+.gallery-dropzone { border: 2px dashed #9fb3c8; border-radius: 6px; color: #627d98; cursor: pointer; margin-bottom: 10px; padding: 24px 16px; text-align: center; transition: border-color .2s, background .2s; }
+.gallery-dropzone.is-dragging, .gallery-dropzone:hover { background: #f0fdfa; border-color: #0f766e; }
+.gallery-dropzone i, .gallery-dropzone strong, .gallery-dropzone span { display: block; }
+.gallery-dropzone i { color: #0f766e; font-size: 28px; margin-bottom: 8px; }
+.gallery-dropzone strong { color: #243b53; font-size: 15px; }
+.gallery-dropzone span { font-size: 12px; margin-top: 4px; }
+.gallery-file-input { display: none; }
+.gallery-previews { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 14px; }
+.gallery-previews img { border-radius: 4px; height: 64px; object-fit: cover; width: 84px; }
+.gallery-processing { color: #0f766e; }

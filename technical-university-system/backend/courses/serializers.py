@@ -2,13 +2,6 @@ from rest_framework import serializers
 from .models import Course, Department
 
 
-class DepartmentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Department
-        fields = ['id', 'name', 'description', 'created_at', 'updated_at']
-        read_only_fields = ['id', 'created_at', 'updated_at']
-
-
 class CourseSerializer(serializers.ModelSerializer):
     department = serializers.PrimaryKeyRelatedField(
         queryset=Department.objects.all(),
@@ -24,9 +17,19 @@ class CourseSerializer(serializers.ModelSerializer):
             'slug',
             'department',
             'description',
+            'duration_months',
             'duration_weeks',
             'credits',
             'is_active',
             'created_at',
         ]
         read_only_fields = ['id', 'created_at']
+
+
+class DepartmentSerializer(serializers.ModelSerializer):
+    courses = CourseSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Department
+        fields = ['id', 'name', 'description', 'requirements', 'image', 'duration_months', 'courses', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'created_at', 'updated_at', 'courses']

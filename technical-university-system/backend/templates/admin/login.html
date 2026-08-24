@@ -1,0 +1,37 @@
+{% extends "registration/base.html" %}
+{% load i18n jazzmin %}
+{% get_jazzmin_settings request as jazzmin_settings %}
+{% get_jazzmin_ui_tweaks as jazzmin_ui %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    body.login-page { background: linear-gradient(135deg, #102a43 0%, #0f766e 100%); }
+    .login-box { max-width: 430px; width: calc(100% - 2rem); }
+    .login-logo { margin-bottom: 1.2rem; }
+    .login-logo img { background: #fff; border-radius: 8px; max-height: 92px; max-width: 210px; object-fit: contain; padding: 10px 18px; }
+    .login-logo a { color: #fff; font-size: 1.7rem; letter-spacing: .03em; }
+    .login-card-body { padding: 2rem; }
+    .login-box-msg { color: #102a43; font-size: 1.25rem; font-weight: 700; padding-bottom: 1.5rem; }
+    .login-card-body .form-control { border-color: #d9e2ec; height: 2.8rem; }
+    .login-card-body .btn-primary { background: #0f766e; border-color: #0f766e; font-weight: 700; height: 2.8rem; }
+    .login-card-body .btn-primary:hover { background: #115e59; border-color: #115e59; }
+</style>
+{% endblock %}
+
+{% block content %}
+<p class="login-box-msg">{{ jazzmin_settings.welcome_sign }}</p>
+<form action="{{ app_path }}" method="post">
+    {% csrf_token %}
+    {% if form.errors %}<div class="callout callout-danger"><p>{% trans "Please enter a correct username and password." %}</p></div>{% endif %}
+    <div class="input-group mb-3">
+        <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
+        <span class="input-group-text"><i class="fas fa-user"></i></span>
+    </div>
+    <div class="input-group mb-3">
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+    </div>
+    <div class="d-grid"><button type="submit" class="btn {{ jazzmin_ui.button_classes.primary }}">{% trans "Sign in" %}</button></div>
+</form>
+{% endblock %}
