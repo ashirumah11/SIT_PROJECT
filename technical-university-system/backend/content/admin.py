@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib import admin
 from django.db import models
-from django.utils.html import format_html
+from django.utils.html import format_html, mark_safe
 from .models import Announcement, StaffMember, EventItem, Testimonial, GalleryItem, HeroCarouselItem
 
 
@@ -78,9 +78,9 @@ class StaffMemberAdmin(admin.ModelAdmin):
         try:
             if obj.image:
                 return format_html('<img src="{}" style="height: 72px; width: 96px; object-fit: cover; border-radius: 5px;"/>', obj.image.url)
-            return format_html('<span style="color: red;">❌ No Image</span>')
+            return mark_safe('<span style="color: red;">❌ No Image</span>')
         except Exception:
-            return format_html('<span style="color: red;">❌ Error</span>')
+            return mark_safe('<span style="color: red;">❌ Error</span>')
 
 
 @admin.register(EventItem)
@@ -116,9 +116,9 @@ class EventItemAdmin(RichTextAdminMixin, admin.ModelAdmin):
         try:
             if obj.image:
                 return format_html('<img src="{}" style="max-height: 200px; border-radius: 4px;"/>', obj.image.url)
-            return format_html('<span style="color: red;">❌ No Image</span>')
+            return mark_safe('<span style="color: red;">❌ No Image</span>')
         except Exception:
-            return format_html('<span style="color: red;">❌ Error</span>')
+            return mark_safe('<span style="color: red;">❌ Error</span>')
 
 
 @admin.register(Testimonial)
@@ -133,9 +133,9 @@ class TestimonialAdmin(RichTextAdminMixin, admin.ModelAdmin):
         try:
             if obj.image:
                 return format_html('<img src="{}" style="height: 72px; width: 96px; object-fit: cover; border-radius: 5px;"/>', obj.image.url)
-            return format_html('<span style="color: red;">❌ No Image</span>')
+            return mark_safe('<span style="color: red;">❌ No Image</span>')
         except Exception:
-            return format_html('<span style="color: red;">❌ Error</span>')
+            return mark_safe('<span style="color: red;">❌ Error</span>')
 
 
 @admin.register(GalleryItem)
@@ -181,9 +181,9 @@ class GalleryItemAdmin(admin.ModelAdmin):
         try:
             if obj.image:
                 return format_html('<img src="{}" style="height: 72px; width: 96px; object-fit: cover; border-radius: 5px;"/>', obj.image.url)
-            return format_html('<span style="color: red;">❌ No Image</span>')
+            return mark_safe('<span style="color: red;">❌ No Image</span>')
         except Exception:
-            return format_html('<span style="color: red;">❌ Error</span>')
+            return mark_safe('<span style="color: red;">❌ Error</span>')
 
 
 @admin.register(HeroCarouselItem)
@@ -215,6 +215,6 @@ class HeroCarouselItemAdmin(admin.ModelAdmin):
         try:
             if obj.image:
                 return format_html('<img src="{}" style="max-height: 40px; border-radius: 4px;"/>', obj.image.url)
-            return format_html('<span style="color: red;">❌ No Image</span>')
+            return mark_safe('<span style="color: red;">❌ No Image</span>')
         except Exception:
-            return format_html('<span style="color: red;">❌ Error</span>')
+            return mark_safe('<span style="color: red;">❌ Error</span>')
