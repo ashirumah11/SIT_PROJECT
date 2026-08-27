@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import workshopImage from '../../assets/hero-workshop.jpg'
-import kitchenImage from '../../assets/course-hospitality.jpg'
-import labsImage from '../../assets/course-ict.jpg'
-import salonImage from '../../assets/course-cosmetology.jpg'
+import workshopImage from '../../assets/infra-workshop.jpg'
+import kitchenImage from '../../assets/infra-kitchen.jpg'
+import labsImage from '../../assets/infra-ictlab.jpg'
+import salonImage from '../../assets/infra-salon.jpg'
+import fashionStudioImage from '../../assets/infra-fashionstudio.JPG'
 
 const infrastructure = [
   {
@@ -28,6 +29,12 @@ const infrastructure = [
     description: 'A practical beauty and grooming studio where cosmetology students build salon, barbering and client-care skills.',
     image: salonImage,
     alt: 'Students practicing salon and barber work in a beauty studio',
+  },
+  {
+    title: 'Fashion Studio',
+    description: 'A creative studio where fashion students develop practical skills in design, tailoring and garment production.',
+    image: fashionStudioImage,
+    alt: 'Students learning fashion design and tailoring in the fashion studio',
   },
 ]
 

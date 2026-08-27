@@ -464,7 +464,13 @@ const Home = () => {
         <div className="section-heading">
           <span className="eyebrow">Why we stand out</span>
           <h2>Why Students Choose PTVTI</h2>
-          <p>Our competency-based approach combines practical workshop training, experienced instructors, industrial attachment opportunities, and career guidance to prepare graduates for employment, entrepreneurship, and lifelong success.</p>
+          <p>As a NITA-accredited institution
+            and a recognized TVET institute in Kenya,
+            we provide quality technical and vocational
+            training designed to equip students with
+            practical, industry-relevant skills for 
+            today’s world of work.
+            </p>
         </div>
 
         <div className="feature-grid">

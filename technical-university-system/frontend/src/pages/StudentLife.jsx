@@ -5,7 +5,6 @@ import { getEventItems, resolveMediaUrl } from '../services/api.js'
 import studentLife1 from '../assets/student-life.jpg'
 import studentLife2 from '../assets/student-life2.jpg'
 import studentLife3 from '../assets/student-life3.jpg'
-import studentLife4 from '../assets/student-life4.jpg'
 
 const carouselImages = [
   { src: studentLife1, alt: 'Students gathered on campus' },
@@ -18,19 +17,13 @@ const defaultEventCards = [
     id: 'default-0',
     title: 'Cultural & Youth Day',
     description: 'Celebrate student creativity with vibrant performances, cultural showcases, and lively campus energy.',
-    image: studentLife2,
+    image: studentLife1,
   },
   {
     id: 'default-1',
     title: 'Team Building',
     description: 'Build trust, collaboration, and leadership through engaging campus activities and group challenges.',
-    image: studentLife3,
-  },
-  {
-    id: 'default-2',
-    title: 'Bible Study',
-    description: 'Gather for meaningful reflection, fellowship, and spiritual growth in a welcoming campus community.',
-    image: studentLife4,
+    image: studentLife2,
   },
 ]
 
@@ -101,7 +94,7 @@ const StudentLife = () => {
               )}
               <div className="card-content">
                 <h3>{event.title}</h3>
-                <p>{event.description}</p>
+                <div dangerouslySetInnerHTML={{ __html: event.description }} />
               </div>
             </article>
           ))}
