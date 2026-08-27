@@ -117,10 +117,16 @@ const Gallery = () => {
     const handleKeyDown = (event) => {
       if (event.key === 'ArrowLeft') {
         event.preventDefault()
-        showPreviousImage(event)
+        setActiveImageIndex((currentIndex) => {
+          if (currentIndex === null) return 0
+          return (currentIndex - 1 + galleryImages.length) % galleryImages.length
+        })
       } else if (event.key === 'ArrowRight') {
         event.preventDefault()
-        showNextImage(event)
+        setActiveImageIndex((currentIndex) => {
+          if (currentIndex === null) return 0
+          return (currentIndex + 1) % galleryImages.length
+        })
       } else if (event.key === 'Escape') {
         event.preventDefault()
         closeLightbox()

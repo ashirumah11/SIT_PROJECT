@@ -184,8 +184,6 @@ const NewsSection = ({ newsItems }) => {
   const [currentIndex, setCurrentIndex] = useState(3)
   const [isTransitioning, setIsTransitioning] = useState(true)
 
-  if (!newsItems || newsItems.length === 0) return null
-
   const cloneCount = visibleSlides
   const infiniteNews = [
     ...newsItems.slice(-cloneCount),
@@ -235,6 +233,8 @@ const NewsSection = ({ newsItems }) => {
     }
     return undefined
   }, [isTransitioning])
+
+  if (!newsItems || newsItems.length === 0) return null
 
   return (
     <section className="section-block section-news">

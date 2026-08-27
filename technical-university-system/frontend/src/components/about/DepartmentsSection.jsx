@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import hospitalityImage from '../../assets/course-hospitality.jpg'
 import engineeringImage from '../../assets/course-engineering.jpg'
 import fashionImage from '../../assets/course-fashion.jpg'
@@ -53,7 +53,6 @@ const defaultLeaders = [
 ]
 
 export default function DepartmentsSection() {
-  const carouselRef = useRef(null)
   const [visibleSlides, setVisibleSlides] = useState(3)
   const [currentIndex, setCurrentIndex] = useState(3)
   const [isTransitioning, setIsTransitioning] = useState(true)
