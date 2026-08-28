@@ -106,9 +106,9 @@ const accredentials = [
 
 const Stats = () => {
   const stats = [
-    { value: '120', label: 'Graduated Students' },
-    { value: '50', label: 'Awards Won' },
-    { value: '587', label: 'Total Students' },
+    { value: '150+', label: 'Graduated Students' },
+    { value: '10+', label: 'Awards Won' },
+    { value: '250+', label: 'Total Students' },
     { value: '86%', label: 'Graduation Rate' },
   ]
 

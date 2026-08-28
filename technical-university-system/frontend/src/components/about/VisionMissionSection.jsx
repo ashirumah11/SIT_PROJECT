@@ -11,8 +11,8 @@ export default function VisionMissionSection() {
       description: 'Honoring the dignity and worth of every person'
     },
     {
-      title: 'Love',
-      icon: '❤️',
+      title: 'Dignity',
+      icon: '⚖️',
       description: 'Caring for others with compassion and kindness'
     },
     {
