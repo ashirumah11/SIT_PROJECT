@@ -1,9 +1,9 @@
-// Use the ngrok API origin when provided; otherwise use the local Vite proxy.
+// Use the deployed API origin when provided; otherwise use the local Vite proxy.
 const apiUrl =
     import.meta.env.VITE_API_URL
 const API_BASE = apiUrl ?
     `${apiUrl.replace(/\/$/, '')}/api/v1` :
-    import.meta.env.VITE_API_BASE || '/api/v1'
+    '/api/v1'
 
 export function resolveMediaUrl(url) {
     if (!url || typeof url !== 'string' || url.trim() === '') return null
