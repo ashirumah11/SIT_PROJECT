@@ -3,6 +3,7 @@ dj-database-url==3.1.2
 Django==6.0.7
 django-cors-headers==4.9.0
 django-jazzmin==3.0.5
+gunicorn==23.0.0
 openpyxl
 djangorestframework==3.17.1
 djangorestframework_simplejwt==5.5.1
@@ -14,3 +15,4 @@ reportlab
 sqlparse==0.5.5
 typing_extensions==4.16.0
 tzdata==2026.3
+whitenoise==6.9.0

@@ -10,12 +10,16 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
 
-SECRET_KEY = 'django-insecure-dev-key'
-DEBUG = True
-ALLOWED_HOSTS = ['localhost',
-                '127.0.0.1', 
-                'wrongness-prude-calzone.ngrok-free.dev',
-                '[::1]']
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dev-key')
+DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
+
+configured_hosts = [host.strip() for host in os.environ.get('ALLOWED_HOSTS', '').split(',') if host.strip()]
+ALLOWED_HOSTS = configured_hosts or [
+    'localhost',
+    '127.0.0.1',
+    'wrongness-prude-calzone.ngrok-free.dev',
+    '[::1]',
+]
 
 INSTALLED_APPS = [
     'jazzmin',
@@ -39,6 +43,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'config.middleware.PermissionsPolicyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,10 +57,9 @@ ROOT_URLCONF = 'config.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
 
+database_url = os.environ.get('DATABASE_URL') or f'sqlite:///{BASE_DIR / "db.sqlite3"}'
 DATABASES = {
-    'default': dj_database_url.parse(
-        os.environ.get('DATABASE_URL')
-    )
+    'default': dj_database_url.parse(database_url, conn_max_age=600)
 }
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -81,6 +85,15 @@ STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
+    },
+    'staticfiles': {
+        'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+    },
+}
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -116,12 +129,28 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
-    'http://127.0.0.1:5173',
-    'https://wrongness-prude-calzone.ngrok-free.dev',
+    origin.strip()
+    for origin in os.environ.get(
+        'CORS_ALLOWED_ORIGINS',
+        'http://localhost:5173,http://127.0.0.1:5173,https://wrongness-prude-calzone.ngrok-free.dev',
+    ).split(',')
+    if origin.strip()
+]
+CORS_ALLOWED_ORIGINS = list(dict.fromkeys(CORS_ALLOWED_ORIGINS))
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',')
+    if origin.strip()
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_ORIGINS = False
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
 
 JAZZMIN_SETTINGS = {
     # ==========================================

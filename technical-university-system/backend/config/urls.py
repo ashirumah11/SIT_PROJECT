@@ -9,9 +9,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
+import os
+
+frontend_url = os.environ.get('FRONTEND_URL', 'http://localhost:5173')
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='http://localhost:5173/', permanent=False)),
+    path('', RedirectView.as_view(url=frontend_url, permanent=False)),
     path('admin/', admin.site.urls),
     path('api/v1/', include('config.api_urls')),
 ]
