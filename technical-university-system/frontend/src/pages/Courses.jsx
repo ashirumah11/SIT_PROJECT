@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import CourseCard from '../components/CourseCard.jsx'
 import engineeringImage from '../assets/course-engineering1.jpg'
-import fashionImage from '../assets/course-fashion1.jpg'
+import fashionImage from '../assets/course-fashion1.JPG'
 import hospitalityImage from '../assets/course-hospitality1.jpg'
 import ictImage from '../assets/course-ict.jpg'
 import cosmetologyImage from '../assets/course-hairdressing.jpg'
