@@ -44,7 +44,7 @@ async function request(path, options = {}) {
     const data = text ? JSON.parse(text) : null
 
     if (!response.ok) {
-        throw new Error(data?.detail || data?.message || response.statusText)
+        throw new Error((data && data.detail) || (data && data.message) || response.statusText)
     }
 
     return data
