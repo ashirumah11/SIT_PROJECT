@@ -1,8 +1,9 @@
 // Use the ngrok API origin when provided; otherwise use the local Vite proxy.
-const apiUrl = import.meta.env.VITE_API_URL
-const API_BASE = apiUrl
-    ? `${apiUrl.replace(/\/$/, '')}/api/v1`
-    : import.meta.env.VITE_API_BASE || '/api/v1'
+const apiUrl =
+    import.meta.env.VITE_API_URL
+const API_BASE = apiUrl ?
+    `${apiUrl.replace(/\/$/, '')}/api/v1` :
+    import.meta.env.VITE_API_BASE || '/api/v1'
 
 export function resolveMediaUrl(url) {
     if (!url || typeof url !== 'string' || url.trim() === '') return null
@@ -22,7 +23,7 @@ export function resolveMediaUrl(url) {
 }
 
 async function request(path, options = {}) {
-    const headers = { ...(options.headers || {}) }
+    const headers = {...(options.headers || {}) }
 
     if (window.location.hostname.endsWith('.ngrok-free.dev') || window.location.hostname.endsWith('.ngrok.app')) {
         headers['ngrok-skip-browser-warning'] = '1'
