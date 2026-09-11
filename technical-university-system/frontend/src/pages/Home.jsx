@@ -464,9 +464,10 @@ const Home = () => {
         <div className="section-heading">
           <span className="eyebrow">Why we stand out</span>
           <h2>Why Students Choose PTVTI</h2>
-          <p>As a NITA-accredited institution
-            and a recognized TVET institute in Kenya,
-            we provide quality technical and vocational
+          <p>The Institute offers courses accredited by
+            Technical and Vocational Education and Training Authority (TVETA)
+            ,in accordance with TVET Act no.29 0f 2013.
+            We provide quality technical and vocational
             training designed to equip students with
             practical, industry-relevant skills for 
             today’s world of work.
