@@ -1,8 +1,7 @@
 // Use the deployed API origin when provided; otherwise use the local Vite proxy.
-const apiUrl =
-    import.meta.env.VITE_API_URL
-const API_BASE = apiUrl ?
-    `${apiUrl.replace(/\/$/, '')}/api/v1` :
+const API_URL = import.meta.env.VITE_API_URL
+const API_BASE = API_URL ?
+    `${API_URL.replace(/\/$/, '')}/api/v1` :
     '/api/v1'
 
 export function resolveMediaUrl(url) {
