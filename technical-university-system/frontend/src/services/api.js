@@ -1,5 +1,6 @@
 // Use the deployed API origin when provided; otherwise use the local Vite proxy.
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL =
+    import.meta.env.VITE_API_URL
 const API_BASE = API_URL ?
     `${API_URL.replace(/\/$/, '')}/api/v1` :
     '/api/v1'
