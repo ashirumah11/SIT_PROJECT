@@ -79,6 +79,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <p className="footer-copyright">© 2026  Palazzolo Technical Institute. All rights reserved.</p>
     </footer>
   )
 }

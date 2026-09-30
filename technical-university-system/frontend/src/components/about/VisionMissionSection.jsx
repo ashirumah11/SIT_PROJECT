@@ -1,34 +1,29 @@
 export default function VisionMissionSection() {
   const coreValues = [
     {
-      title: 'Integrity',
-      icon: '🛡️',
-      description: 'Acting honestly and responsibly in every commitment'
-    },
-    {
       title: 'Respect',
       icon: '🤝',
-      description: 'Honoring the dignity and worth of every person'
+      description: 'Treating every person with consideration and fairness.'
+    },
+    {
+      title: 'Integrity',
+      icon: '🛡️',
+      description: 'Acting with honesty, accountability, and consistency.'
     },
     {
       title: 'Dignity',
       icon: '⚖️',
-      description: 'Caring for others with compassion and kindness'
+      description: 'Affirming the worth and potential of every person.'
     },
     {
-      title: 'Understanding',
-      icon: '🧠',
-      description: 'Listening with empathy and seeking common ground'
+      title: 'Excellence',
+      icon: '🏆',
+      description: 'Pursuing quality and continuous improvement in all we do.'
     },
     {
-      title: 'Sharing',
+      title: 'Collaboration',
       icon: '🤲',
-      description: 'Giving generously and building community together'
-    },
-    {
-      title: 'Responsibility',
-      icon: '✅',
-      description: 'Taking ownership with commitment and accountability'
+      description: 'Working together to support learners and strengthen community.'
     }
   ];
 
@@ -39,21 +34,14 @@ export default function VisionMissionSection() {
           <span className="vision-mission-kicker">Our Vision</span>
           <div className="vision-mission-rule" aria-hidden="true" />
           <p>
-            Transformation in Youth life contributing
-            to the economic and social development of
-            the society, through skill based education 
-            that lead to students to employment and meets
-            the demand of labor market. 
+            To be a center of excellence transforming youth into skilled, responsible and values-driven professionals.
           </p>
         </article>
         <article className="vision-mission-item">
           <span className="vision-mission-kicker">Our Mission</span>
           <div className="vision-mission-rule" aria-hidden="true" />
           <p>
-            To provide quality technical and vocational
-            training to all students irrespective of their
-            age, gender, race, tribe, orientation, religion
-            and social status.
+            To provide quality, inclusive and values-based technical and vocational training that equips youth with relevant skills and promotes holistic transformation.
           </p>
         </article>
       </div>
