@@ -143,15 +143,52 @@ const Stats = () => {
   )
 }
 
+const cleanTestimonialQuote = (quote = '') => {
+  const quoteDocument = new DOMParser().parseFromString(quote || '', 'text/html')
+  quoteDocument.querySelectorAll('br').forEach((lineBreak) => lineBreak.replaceWith(' '))
+  quoteDocument
+    .querySelectorAll('address, article, blockquote, div, li, ol, p, section, ul')
+    .forEach((block) => block.append(' '))
+
+  const text = quoteDocument.body.textContent.replace(/\s+/g, ' ').trim()
+  return /^[“"]/.test(text) && /[”"]$/.test(text) ? text : `“${text}”`
+}
+
 const Testimonials = ({ testimonials }) => {
-  const [active, setActive] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(1)
+  const [isTransitioning, setIsTransitioning] = useState(true)
+  const slideCount = testimonials?.length || 0
+  const infiniteTestimonials = slideCount > 0
+    ? [testimonials[slideCount - 1], ...testimonials, testimonials[0]]
+    : []
 
-  if (!testimonials || testimonials.length === 0) return null
+  const handlePrev = () => setCurrentIndex((index) => index - 1)
+  const handleNext = () => setCurrentIndex((index) => index + 1)
 
-  const handlePrev = () => setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  const handleNext = () => setActive((prev) => (prev + 1) % testimonials.length)
+  const handleTransitionEnd = () => {
+    if (currentIndex <= 0) {
+      setIsTransitioning(false)
+      setCurrentIndex(slideCount)
+    } else if (currentIndex >= slideCount + 1) {
+      setIsTransitioning(false)
+      setCurrentIndex(1)
+    }
+  }
 
-  const current = testimonials[active] || testimonials[0]
+  useEffect(() => {
+    setCurrentIndex(1)
+    setIsTransitioning(false)
+  }, [slideCount])
+
+  useEffect(() => {
+    if (!isTransitioning) {
+      const frame = window.requestAnimationFrame(() => setIsTransitioning(true))
+      return () => window.cancelAnimationFrame(frame)
+    }
+    return undefined
+  }, [isTransitioning])
+
+  if (slideCount === 0) return null
 
   return (
     <section className="section-block section-testimonials">
@@ -163,14 +200,29 @@ const Testimonials = ({ testimonials }) => {
 
       <div className="testimonials-wrapper">
         <button type="button" className="testimonial-control prev" onClick={handlePrev} aria-label="Previous testimonial">‹</button>
-        <div className="testimonial-card">
-          <div className="testimonial-image" style={{ backgroundImage: `url(${current.image})` }} />
-          <div className="testimonial-copy">
-            <div className="testimonial-quote">“{current.quote}”</div>
-            <div className="testimonial-author">
-              <strong>{current.name}</strong>
-              <span>{current.role}</span>
-            </div>
+        <div className="testimonial-track-container">
+          <div
+            className="testimonial-track"
+            onTransitionEnd={handleTransitionEnd}
+            style={{
+              transform: `translateX(-${currentIndex * 100}%)`,
+              transition: isTransitioning ? 'transform 400ms ease' : 'none',
+            }}
+          >
+            {infiniteTestimonials.map((testimonial, index) => (
+              <div className="testimonial-slide" key={`${testimonial.id}-${index}`}>
+                <div className="testimonial-card">
+                  <div className="testimonial-image" style={{ backgroundImage: `url(${testimonial.image})` }} />
+                  <div className="testimonial-copy">
+                    <div className="testimonial-quote">{cleanTestimonialQuote(testimonial.quote)}</div>
+                    <div className="testimonial-author">
+                      <strong>{testimonial.name}</strong>
+                      <span>{testimonial.role}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <button type="button" className="testimonial-control next" onClick={handleNext} aria-label="Next testimonial">›</button>

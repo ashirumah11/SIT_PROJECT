@@ -803,6 +803,24 @@
     margin-right: auto;
 }
 
+.testimonial-track-container {
+    overflow: hidden;
+    min-width: 0;
+    width: 100%;
+}
+
+.testimonial-track {
+    display: flex;
+    width: 100%;
+    will-change: transform;
+}
+
+.testimonial-slide {
+    flex: 0 0 100%;
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
 .testimonial-card {
     display: grid;
     grid-template-columns: 360px minmax(0, 1fr);
@@ -878,8 +896,10 @@
         gap: 14px;
     }
     .testimonial-card {
-        grid-area: card;
         grid-template-columns: 1fr;
+    }
+    .testimonial-track-container {
+        grid-area: card;
     }
     .testimonial-control.prev {
         grid-area: prev;
