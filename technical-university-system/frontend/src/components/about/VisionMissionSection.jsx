@@ -46,6 +46,12 @@ export default function VisionMissionSection() {
         </article>
       </div>
 
+      <div className="vision-mission-motto">
+        <span className="vision-mission-kicker">Our Motto</span>
+        <div className="vision-mission-rule" aria-hidden="true" />
+        <p>With God at the Centre, we serve, train and transform</p>
+      </div>
+
       {/* Core Values Section */}
       <div className="core-values-container">
         <h3 className="core-values-title">Our Core Values</h3>
